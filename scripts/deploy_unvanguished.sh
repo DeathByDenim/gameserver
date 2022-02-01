@@ -36,7 +36,7 @@ Description=Unvanguished server
 After=network.target
 
 [Service]
-ExecStart=${unvanquished_directory}/bin/daemonded -pakpath ${unvanquished_directory}/share/pkg/ -libpath ${unvanquished_directory}/bin/ -homepath \${HOME}/unvanguished_home/ +exec unvanguished.cfg
+ExecStart=/usr/bin/console2web -p 62549 ${unvanquished_directory}/bin/daemonded -pakpath ${unvanquished_directory}/share/pkg/ -libpath ${unvanquished_directory}/bin/ -homepath \${HOME}/unvanguished_home/ +exec unvanguished.cfg
 Restart=on-failure
 User=${systemuser}
 
