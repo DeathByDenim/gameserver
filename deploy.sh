@@ -42,15 +42,15 @@ fi
 cp console2web/console2web.py /usr/bin/console2web
 
 # Deploy the game servers
-$(dirname "$0")/scripts/deploy_supertuxkart.sh
-$(dirname "$0")/scripts/deploy_bzflag.sh
-$(dirname "$0")/scripts/deploy_hedgewars.sh
-$(dirname "$0")/scripts/deploy_mindustry.sh
-$(dirname "$0")/scripts/deploy_openhv.sh
-$(dirname "$0")/scripts/deploy_openspades.sh
-$(dirname "$0")/scripts/deploy_teeworlds.sh
-$(dirname "$0")/scripts/deploy_unvanguished.sh
-$(dirname "$0")/scripts/deploy_xonotic.sh
+"$(dirname "$0")"/scripts/deploy_supertuxkart.sh
+"$(dirname "$0")"/scripts/deploy_bzflag.sh
+"$(dirname "$0")"/scripts/deploy_hedgewars.sh
+"$(dirname "$0")"/scripts/deploy_mindustry.sh
+"$(dirname "$0")"/scripts/deploy_openhv.sh
+"$(dirname "$0")"/scripts/deploy_openspades.sh
+"$(dirname "$0")"/scripts/deploy_teeworlds.sh
+"$(dirname "$0")"/scripts/deploy_unvanguished.sh
+"$(dirname "$0")"/scripts/deploy_xonotic.sh
 
 # Web dashboard
 systemctl enable --now nginx
@@ -60,3 +60,5 @@ firewall-cmd --zone=public --add-service=https --permanent
 firewall-cmd --reload
 
 certbot -n --nginx -d ${LINODE_ID} -d www.${LINODE_ID} --agree-tos -m jarno@jarno.ca
+
+cp -r "$(dirname "$0")"/website/* /var/www/html
