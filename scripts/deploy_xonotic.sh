@@ -30,14 +30,14 @@ sv_vote_call 1
 sv_weaponstats_file http://www.xonotic.org/weaponbalance/
 EOF
 
-cat > /etc/systemd/system/xonoto.service <<EOF
+cat > /etc/systemd/system/xonotic.service <<EOF
 [Unit]
 Description=Unvanguished server
 After=network.target
 
 [Service]
 WorkingDirectory=${xonotic_directory}
-ExecStart=${xonotic_directory}daemonded -pakpath ${unvanquished_directory}/share/pkg/ -libpath ${unvanquished_directory}/bin/ -homepath \${HOME}/unvanguished_home/ +exec unvanguished.cfg
+ExecStart=/usr/bin/console2web -p 62550 ${xonotic_directory}daemonded -pakpath ${unvanquished_directory}/share/pkg/ -libpath ${unvanquished_directory}/bin/ -homepath \${HOME}/unvanguished_home/ +exec unvanguished.cfg
 Restart=on-failure
 User=${systemuser}
 
@@ -46,6 +46,6 @@ WantedBy=multi-user.target
 EOF
 
 systemctl daemon-reload
-systemctl enable --now xonoto.service
+systemctl enable --now xonotic.service
 
 firewall-cmd --zone=public --add-port=26000/udp --permanent
