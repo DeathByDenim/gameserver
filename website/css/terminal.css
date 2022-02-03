@@ -25,7 +25,7 @@
   border: solid grey;
   background-color: var(--terminal-color-background);
   width: min(95%, 1024px);
-  height: 40em;
+  height: 20em;
   overflow-x: hidden;
   overflow-y: auto;
   display: flex;
@@ -36,7 +36,7 @@
   margin: 0;
   padding: 0;
   font-family: monospace;
-  font-weight: bold;
+  /* font-weight: bold; */
   white-space: pre-wrap;
   /* word-break: break-all; */
   color: var(--terminal-color-default);
@@ -59,7 +59,7 @@
   border: solid grey;
   background-color: var(--terminal-color-background);
   width: min(95%, 1024px);
-  height: 40em;
+  height: 20em;
   overflow-x: hidden;
   overflow-y: auto;
   display: flex;
@@ -70,7 +70,7 @@
   margin: 0;
   padding: 0;
   font-family: monospace;
-  font-weight: bold;
+  /* font-weight: bold; */
   white-space: pre-wrap;
   /* word-break: break-all; */
   color: var(--terminal-color-default);
@@ -93,7 +93,7 @@
   border: solid grey;
   background-color: var(--terminal-color-background);
   width: min(95%, 1024px);
-  height: 40em;
+  height: 20em;
   overflow-x: hidden;
   overflow-y: auto;
   display: flex;
@@ -104,7 +104,7 @@
   margin: 0;
   padding: 0;
   font-family: monospace;
-  font-weight: bold;
+  /* font-weight: bold; */
   white-space: pre-wrap;
   /* word-break: break-all; */
   color: var(--terminal-color-default);
@@ -171,4 +171,8 @@
 }
 .TERM_FOREGROUND_7_INTENSE {
   color: var(--terminal-color-7-intense);
+}
+
+.TERM_FOREGROUND_BOLD {
+  font-weight: bold;
 }
