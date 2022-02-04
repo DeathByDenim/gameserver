@@ -21,6 +21,10 @@ function mindustry_init() {
     socket.send('status');
   });
 
+  socket.addEventListener('error', function (event) {
+    console.error(event);
+  });
+
   // Listen for messages
   socket.addEventListener('message', function (event) {
     const mindustry_output = document.getElementById('mindustry_output');

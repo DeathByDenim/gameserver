@@ -21,6 +21,10 @@ function xonotic_init() {
     socket.send('who');
   });
 
+  socket.addEventListener('error', function (event) {
+    console.error(event);
+  });
+
   // Listen for messages
   socket.addEventListener('message', function (event) {
     const xonotic_output = document.getElementById('xonotic_output');

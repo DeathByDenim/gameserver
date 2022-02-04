@@ -21,6 +21,10 @@ function unvanquished_init() {
     socket.send('/status');
   });
 
+  socket.addEventListener('error', function (event) {
+    console.error(event);
+  });
+
   // Listen for messages
   socket.addEventListener('message', function (event) {
     const unvanquished_output = document.getElementById('unvanquished_output');
