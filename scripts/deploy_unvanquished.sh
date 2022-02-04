@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-# Unvanguished
+# Unvanquished
 unvanquished_directory="/opt/unvanquished-${unvanquished_version}"
 curl --location "https://github.com/Unvanquished/Unvanquished/releases/download/v${unvanquished_version}/unvanquished_${unvanquished_version}.zip" > ${TMPDIR:-/tmp}/unvanquished.zip
 unzip -o -f -d ${TMPDIR:-/tmp} ${TMPDIR:-/tmp}/unvanquished.zip
@@ -13,9 +13,9 @@ fi
 mv ${TMPDIR:-/tmp}/unvanquished*/pkg ${unvanquished_directory}/share
 rm -rf ${TMPDIR:-/tmp}/unvanquished*
 
-mkdir -p ${systemuserhome}/unvanguished_home/config
-cat > ${systemuserhome}/unvanguished_home/config/unvanguished.cfg <<EOF
-set server.private 1 
+mkdir -p ${systemuserhome}/unvanquished_home/config
+cat > ${systemuserhome}/unvanquished_home/config/unvanquished.cfg <<EOF
+set server.private 1
 set g_needpass 0
 set sv_hostname "^NUnvanquished ^3onFOSS-LAN"
 set g_motd "^2get news on ^5${LINODE_ID}"
@@ -28,15 +28,15 @@ set g_mapConfigs "map"
 set g_initialMapRotation rotation1
 map yocto
 EOF
-chown -R ${systemuser}: ${systemuserhome}/unvanguished_home
+chown -R ${systemuser}: ${systemuserhome}/unvanquished_home
 
-cat > /etc/systemd/system/unvanguished.service <<EOF
+cat > /etc/systemd/system/unvanquished.service <<EOF
 [Unit]
-Description=Unvanguished server
+Description=Unvanquished server
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/console2web -p 62549 ${unvanquished_directory}/bin/daemonded -pakpath ${unvanquished_directory}/share/pkg/ -libpath ${unvanquished_directory}/bin/ -homepath \${HOME}/unvanguished_home/ +exec unvanguished.cfg
+ExecStart=/usr/bin/console2web -p 62549 ${unvanquished_directory}/bin/daemonded -pakpath ${unvanquished_directory}/share/pkg/ -libpath ${unvanquished_directory}/bin/ -homepath \${HOME}/unvanquished_home/ +exec unvanquished.cfg
 Restart=on-failure
 User=${systemuser}
 
@@ -45,7 +45,6 @@ WantedBy=multi-user.target
 EOF
 
 systemctl daemon-reload
-systemctl enable --now unvanguished.service
+systemctl enable --now unvanquished.service
 
 firewall-cmd --zone=public --add-port=27960/udp --permanent
-

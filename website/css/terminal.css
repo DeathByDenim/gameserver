@@ -55,7 +55,7 @@
   text-shadow: 0;
 }
 
-#unvanguished_output {
+#unvanquished_output {
   border: solid grey;
   background-color: var(--terminal-color-background);
   width: min(95%, 1024px);
@@ -66,7 +66,7 @@
   flex-direction: column-reverse;
 }
 
-#unvanguished_output p {
+#unvanquished_output p {
   margin: 0;
   padding: 0;
   font-family: monospace;
@@ -77,11 +77,11 @@
   display: inline-block;
 }
 
-#unvanguished_command {
+#unvanquished_command {
   width: calc(min(95%, 1024px) - 10em);
 }
 
-#unvanguished_submit {
+#unvanquished_submit {
   width: 10em;
   padding: 0;
   margin: 0;
