@@ -35,7 +35,7 @@ EOF
 
 cat > /etc/systemd/system/xonotic.service <<EOF
 [Unit]
-Description=Unvanguished server
+Description=Xonotic server
 After=network.target
 
 [Service]
