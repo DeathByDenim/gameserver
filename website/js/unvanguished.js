@@ -23,7 +23,6 @@ function unvanguished_init() {
 
   // Listen for messages
   socket.addEventListener('message', function (event) {
-    console.log(event);
     const unvanguished_output = document.getElementById('unvanguished_output');
     let line = document.createElement('p')
     line.innerHTML = convertDaemonedCodeToHtml(event.data);

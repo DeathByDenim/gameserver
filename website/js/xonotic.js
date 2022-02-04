@@ -18,14 +18,14 @@ function xonotic_init() {
 
   // Connection opened
   socket.addEventListener('open', function (event) {
-    socket.send('/status');
+    socket.send('who');
   });
 
   // Listen for messages
   socket.addEventListener('message', function (event) {
     const xonotic_output = document.getElementById('xonotic_output');
     let line = document.createElement('p')
-    line.innerHTML = convertDaemonedCodeToHtml(event.data);
+    line.innerHTML = convertTerminalCodeToHtml(event.data);
     xonotic_output.prepend(line);
   });
 }

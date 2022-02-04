@@ -8,7 +8,10 @@ mkdir -p "${xonotic_directory}"
 unzip -f -o -d ${xonotic_directory} ${TMPDIR:-/tmp}/xonotic.zip
 rm -f ${TMPDIR:-/tmp}/xonotic.zip
 
-cat > /etc/xonotic.cfg <<EOF
+mkdir -p ${systemuserhome}/xonotic/data
+chown -R ${systemuser}: ${systemuserhome}/xonotic
+
+cat > ${systemuserhome}/xonotic/data/server.cfg <<EOF
 sv_public 0
 hostname "onFOSS"
 maxplayers 64
@@ -36,8 +39,8 @@ Description=Unvanguished server
 After=network.target
 
 [Service]
-WorkingDirectory=${xonotic_directory}
-ExecStart=/usr/bin/console2web -p 62550 ${xonotic_directory}/daemonded -pakpath ${unvanquished_directory}/share/pkg/ -libpath ${unvanquished_directory}/bin/ -homepath \${HOME}/unvanguished_home/ +exec unvanguished.cfg
+WorkingDirectory=${xonotic_directory}/Xonotic
+ExecStart=/usr/bin/console2web -p 62550 ${xonotic_directory}/Xonotic/xonotic-linux64-dedicated +serverconfig server.cfg -userdir ${systemuserhome}/xonotic
 Restart=on-failure
 User=${systemuser}
 

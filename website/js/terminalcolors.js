@@ -7,24 +7,30 @@ function convertTerminalCodeToHtml(line) {
       let code = line[++i]
       if(code == '[') {
         // This means it's a colour
-        let colour_code = "";
-        for(i++; i < line.length && line[i] != 'm'; i++) {
-          colour_code += line[i];
-        }
-        colour_code = parseInt(colour_code);
-        if(colour_code === 0) {
-          for(let i = 0; i < open_spans; i++) {
-            htmlline += "</span>";
+        while(i < line.length && line[i] != 'm') {
+          let colour_code = "";
+          for(i++; i < line.length && line[i] != 'm' && line[i] != ';'; i++) {
+            colour_code += line[i];
           }
-          open_spans = 0;
-        }
-        else if(colour_code >= 30 && colour_code <= 37) {
-          htmlline += '<span class="TERM_FOREGROUND_'+(colour_code-30)+'">';
-          open_spans++;
-        }
-        else if(colour_code >= 90 && colour_code <= 97) {
-          htmlline += '<span class="TERM_FOREGROUND_'+(colour_code-90)+'_INTENSE">';
-          open_spans++;
+          colour_code = parseInt(colour_code);
+          if(colour_code === 0) {
+            for(let i = 0; i < open_spans; i++) {
+              htmlline += "</span>";
+            }
+            open_spans = 0;
+          }
+          if(colour_code === 1) {
+            htmlline += '<span class="TERM_FOREGROUND_BOLD">';
+            open_spans++;
+          }
+          else if(colour_code >= 30 && colour_code <= 37) {
+            htmlline += '<span class="TERM_FOREGROUND_'+(colour_code-30)+'">';
+            open_spans++;
+          }
+          else if(colour_code >= 90 && colour_code <= 97) {
+            htmlline += '<span class="TERM_FOREGROUND_'+(colour_code-90)+'_INTENSE">';
+            open_spans++;
+          }
         }
       }
     }
