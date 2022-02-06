@@ -8,9 +8,9 @@ fi
 # Unvanquished
 unvanquished_directory="/opt/unvanquished-${unvanquished_version}"
 curl --location "https://github.com/Unvanquished/Unvanquished/releases/download/v${unvanquished_version}/unvanquished_${unvanquished_version}.zip" > ${TMPDIR:-/tmp}/unvanquished.zip
-unzip -o -f -d ${TMPDIR:-/tmp} ${TMPDIR:-/tmp}/unvanquished.zip
+unzip -o -d ${TMPDIR:-/tmp} ${TMPDIR:-/tmp}/unvanquished.zip
 mkdir -p ${unvanquished_directory}/bin ${unvanquished_directory}/share
-unzip -o -f -d ${unvanquished_directory}/bin ${TMPDIR:-/tmp}/unvanquished*/linux-amd64.zip
+unzip -o -d ${unvanquished_directory}/bin ${TMPDIR:-/tmp}/unvanquished*/linux-amd64.zip
 if [ -d ${unvanquished_directory}/share/pkg ]; then
   rm -rf ${unvanquished_directory}/share/pkg
 fi

@@ -9,7 +9,7 @@ fi
 xonotic_directory="/opt/xonotic-${xonotic_version}"
 curl --location https://dl.xonotic.org/xonotic-${xonotic_version}.zip > ${TMPDIR:-/tmp}/xonotic.zip
 mkdir -p "${xonotic_directory}"
-unzip -f -o -d ${xonotic_directory} ${TMPDIR:-/tmp}/xonotic.zip
+unzip -o -d ${xonotic_directory} ${TMPDIR:-/tmp}/xonotic.zip
 rm -f ${TMPDIR:-/tmp}/xonotic.zip
 
 mkdir -p ${systemuserhome}/xonotic/data
