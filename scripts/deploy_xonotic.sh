@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+if [ -e /etc/systemd/system/xonotic.service ]; then
+  systemctl stop xonotic
+fi
+
 # Xonotic
 xonotic_directory="/opt/xonotic-${xonotic_version}"
 curl --location https://dl.xonotic.org/xonotic-${xonotic_version}.zip > ${TMPDIR:-/tmp}/xonotic.zip

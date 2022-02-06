@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+if [ -e /etc/systemd/system/openspades.service ]; then
+  systemctl stop openspades
+fi
+
 # OpenSpades
 mkdir -p /opt/openspades
 virtualenv -p python3 /opt/openspades/env

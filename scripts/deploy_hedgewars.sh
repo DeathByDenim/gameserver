@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+if [ -e /etc/systemd/system/hedgewars.service ]; then
+  systemctl stop hedgewars
+fi
+
 # Hedgewars
 # Create SystemD unit
 cat > /etc/systemd/system/hedgewars.service <<EOF

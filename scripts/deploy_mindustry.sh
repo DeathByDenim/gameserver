@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+if [ -e /etc/systemd/system/mindustry.service ]; then
+  systemctl stop mindustry
+fi
+
 # Mindustry
 mkdir -p /opt/mindustry-v${mindustry_version}
 curl --location https://github.com/Anuken/Mindustry/releases/download/v${mindustry_version}/server-release.jar > /opt/mindustry-v${mindustry_version}/mindustry.jar

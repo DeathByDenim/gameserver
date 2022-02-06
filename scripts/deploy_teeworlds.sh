@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+if [ -e /etc/systemd/system/teeworlds.service ]; then
+  systemctl stop teeworlds
+fi
+
 # Teeworlds
 teeworld_directory="/opt/teeworlds-${teeworlds_version}"
 mkdir -p ${teeworld_directory}

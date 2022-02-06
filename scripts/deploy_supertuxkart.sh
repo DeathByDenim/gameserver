@@ -3,6 +3,10 @@
 echo "Installing SuperTuxKart ${stk_version}"
 exit
 
+if [ -e /etc/systemd/system/supertuxkart.service ]; then
+  systemctl stop supertuxkart
+fi
+
 # Install SuperTuxKart
 stk_dir="/opt/SuperTuxKart-${stk_version}"
 mkdir -p ${stk_dir}

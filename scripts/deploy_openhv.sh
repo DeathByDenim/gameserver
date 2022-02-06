@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+if [ -e /etc/systemd/system/openhv.service ]; then
+  systemctl stop openhv
+fi
+
 # Install OpenHV
 mkdir -p /opt/openhv-${openhv_version}
 curl --location "https://github.com/OpenHV/OpenHV/releases/download/${openhv_version}/OpenHV-${openhv_version}-x86_64.AppImage" > /opt/openhv-${openhv_version}/OpenHV-x86_64.AppImage
