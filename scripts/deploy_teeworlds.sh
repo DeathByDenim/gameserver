@@ -16,7 +16,7 @@ sv_map dm3
 sv_scorelimit 20
 sv_timelimit 10
 sv_gametype dm
-sv_motd "HAVE FUN!\nTo change the gamemode you have to reload or change the map to apply the change.\n\n${LINODE_ID}"
+sv_motd "HAVE FUN!\nTo change the gamemode you have to reload or change the map to apply the change.\n\n${DOMAINNAME}"
 sv_max_clients 64
 sv_spectator_slots 16
 

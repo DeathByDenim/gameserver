@@ -22,7 +22,7 @@ cat > ${systemuserhome}/unvanquished_home/config/unvanquished.cfg <<EOF
 set server.private 1
 set g_needpass 0
 set sv_hostname "^NUnvanquished ^3onFOSS-LAN"
-set g_motd "^2get news on ^5${LINODE_ID}"
+set g_motd "^2get news on ^5${DOMAINNAME}"
 set sv_allowdownload 0
 set sv_maxclients 24
 set timelimit 0

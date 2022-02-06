@@ -3,6 +3,9 @@
 ### Deploy script for a game server running multiple open-source game servers
 ### This script is intended for Debian 11, but may work on other apt-based
 ### systems too
+###
+### Specify domain name:
+###   DOMAINNAME=example.com ./deploy.sh
 
 set -e
 
@@ -15,6 +18,7 @@ export unvanquished_version="0.52.1"
 export xonotic_version="0.8.2"
 
 export systemuser="onfoss"
+export letsencryptemail="jarno@jarno.ca"
 
 # Install what we need
 apt update -y && apt full-upgrade -y
@@ -59,6 +63,6 @@ firewall-cmd --zone=public --add-service=http --permanent
 firewall-cmd --zone=public --add-service=https --permanent
 firewall-cmd --reload
 
-certbot -n --nginx -d ${LINODE_ID} -d www.${LINODE_ID} --agree-tos -m jarno@jarno.ca
+certbot -n --nginx -d ${DOMAINNAME} -d www.${DOMAINNAME} --agree-tos -m "${letsencryptemail}"
 
 cp -r "$(dirname "$0")"/website/* /var/www/html
