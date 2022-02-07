@@ -1,0 +1,14 @@
+.cpu {
+  stroke: hotpink;
+  stroke-width: 3px;
+}
+.mem {
+  stroke: darkgreen;
+  stroke-width: 3px;
+}
+.graph {
+}
+.graphframe {
+  stroke: black;
+  fill: none;
+}

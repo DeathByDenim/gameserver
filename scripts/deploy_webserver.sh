@@ -38,7 +38,7 @@ patch /etc/nginx/sites-available/default <<EOF
  # Default server configuration
  #
  server {
-@@ -121,6 +126,30 @@
+@@ -121,6 +130,30 @@
                 try_files \$uri \$uri/ =404;
         }
 
@@ -64,6 +64,10 @@ patch /etc/nginx/sites-available/default <<EOF
 +            proxy_set_header Upgrade \$http_upgrade;
 +            proxy_set_header Connection "Upgrade";
 +            proxy_set_header Host \$host;
++        }
++
++        location /monitoring/ {
++            proxy_pass http://localhost:9000/;
 +        }
 +
         # pass PHP scripts to FastCGI server

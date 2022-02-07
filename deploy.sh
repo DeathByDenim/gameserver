@@ -32,7 +32,7 @@ apt install --assume-yes \
   python3-dev apt virtualenv python3-virtualenv libjpeg-dev zlib1g-dev \
   fuse hedgewars g++ gcc curl firewalld automake autoconf libtool \
   libcurl3-dev libc-ares-dev zlib1g-dev libncurses-dev make python3-aiohttp \
-  nginx-core certbot python3-certbot-nginx sudo
+  nginx-core certbot python3-certbot-nginx sudo python3-psutil
 
 # Create the user for running the game servers
 if ! getent passwd ${systemuser}; then
@@ -60,4 +60,7 @@ cp console2web/console2web.py /usr/bin/console2web
 "$(dirname "$0")"/scripts/deploy_teeworlds.sh
 "$(dirname "$0")"/scripts/deploy_unvanquished.sh
 "$(dirname "$0")"/scripts/deploy_xonotic.sh
+
+# Deploy web interface stuff
+"$(dirname "$0")"/scripts/deploy_monitoring.sh
 "$(dirname "$0")"/scripts/deploy_webserver.sh
