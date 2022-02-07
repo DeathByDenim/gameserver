@@ -9,6 +9,11 @@
 
 set -e
 
+if [ -z $DOMAINNAME ]; do
+  echo "Domain name was not set. Please export DOMAINNAME first"
+  exit 1
+fi
+
 export stk_version="1.3"
 export bzflag_version="2.4"
 export mindustry_version="135"
@@ -55,14 +60,4 @@ cp console2web/console2web.py /usr/bin/console2web
 "$(dirname "$0")"/scripts/deploy_teeworlds.sh
 "$(dirname "$0")"/scripts/deploy_unvanquished.sh
 "$(dirname "$0")"/scripts/deploy_xonotic.sh
-
-# Web dashboard
-systemctl enable --now nginx
-
-firewall-cmd --zone=public --add-service=http --permanent
-firewall-cmd --zone=public --add-service=https --permanent
-firewall-cmd --reload
-
-certbot -n --nginx -d ${DOMAINNAME} -d www.${DOMAINNAME} --agree-tos -m "${letsencryptemail}"
-
-cp -r "$(dirname "$0")"/website/* /var/www/html
+"$(dirname "$0")"/scripts/deploy_webserver.sh
