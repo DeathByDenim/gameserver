@@ -23,9 +23,9 @@ done
 
 # Patch the NGINX configuration for the web sockets
 cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
-patch /etc/nginx/sites-available/default <<EOF
---- default.bak 2022-02-06 21:02:32.827769618 +0000
-+++ default     2022-02-06 21:02:32.827769618 +0000
+patch --ignore-whitespace /etc/nginx/sites-available/default <<EOF
+--- default.bak 2022-02-09 12:00:07.665387879 +0000
++++ default     2022-02-09 12:02:41.083719671 +0000
 @@ -16,6 +16,11 @@
  # Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
  ##
@@ -38,7 +38,7 @@ patch /etc/nginx/sites-available/default <<EOF
  # Default server configuration
  #
  server {
-@@ -121,6 +130,30 @@
+@@ -121,6 +126,34 @@
                 try_files \$uri \$uri/ =404;
         }
 
