@@ -9,7 +9,7 @@
 
 set -e
 
-if [ -z $DOMAINNAME ]; do
+if [ -z $DOMAINNAME ]; then
   echo "Domain name was not set. Please export DOMAINNAME first"
   exit 1
 fi
