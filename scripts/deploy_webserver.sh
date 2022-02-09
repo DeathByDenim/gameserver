@@ -13,7 +13,7 @@ firewall-cmd --reload
 certbot -n --nginx -d ${DOMAINNAME} -d www.${DOMAINNAME} --agree-tos -m "${letsencryptemail}"
 
 # Put the website files in place
-cp -r "$(dirname "$0")"/website/* /var/www/html
+cp -r "$(dirname "$0")"/../website/* /var/www/html
 for file in $(grep -lR 192.168 /var/www/html/); do
   sed -i $file -e s/"192\.168\.122\.229"/"${DOMAINNAME}"/g
 done
