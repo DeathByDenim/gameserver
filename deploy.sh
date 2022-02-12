@@ -21,6 +21,7 @@ export openhv_version="20220128"
 export teeworlds_version="0.7.5"
 export unvanquished_version="0.52.1"
 export xonotic_version="0.8.2"
+export lix_version="0.9.41"
 
 export systemuser="onfoss"
 export letsencryptemail="jarno@jarno.ca"
@@ -32,7 +33,8 @@ apt install --assume-yes \
   python3-dev apt virtualenv python3-virtualenv libjpeg-dev zlib1g-dev \
   fuse g++ gcc curl firewalld automake autoconf libtool \
   libcurl3-dev libc-ares-dev zlib1g-dev libncurses-dev make python3-aiohttp \
-  nginx-core certbot python3-certbot-nginx sudo python3-psutil
+  nginx-core certbot python3-certbot-nginx sudo python3-psutil \
+  ldc dub libenet-dev
 
 # Create the user for running the game servers
 if ! getent passwd ${systemuser}; then
@@ -54,6 +56,7 @@ cp console2web/console2web.py /usr/bin/console2web
 "$(dirname "$0")"/scripts/deploy_supertuxkart.sh
 "$(dirname "$0")"/scripts/deploy_bzflag.sh
 "$(dirname "$0")"/scripts/deploy_hedgewars.sh
+"$(dirname "$0")"/scripts/deploy_lix.sh
 "$(dirname "$0")"/scripts/deploy_mindustry.sh
 "$(dirname "$0")"/scripts/deploy_openhv.sh
 "$(dirname "$0")"/scripts/deploy_openspades.sh
