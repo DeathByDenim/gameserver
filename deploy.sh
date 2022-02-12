@@ -30,7 +30,7 @@ apt update -y && apt full-upgrade -y
 apt install --assume-yes \
   git tmux unzip curl vim openjdk-11-jdk xz-utils python3-venv python3-pip \
   python3-dev apt virtualenv python3-virtualenv libjpeg-dev zlib1g-dev \
-  fuse hedgewars g++ gcc curl firewalld automake autoconf libtool \
+  fuse g++ gcc curl firewalld automake autoconf libtool \
   libcurl3-dev libc-ares-dev zlib1g-dev libncurses-dev make python3-aiohttp \
   nginx-core certbot python3-certbot-nginx sudo python3-psutil
 

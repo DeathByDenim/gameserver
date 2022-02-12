@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+apt install --assume-yes hedgewars
+
 if [ -e /etc/systemd/system/hedgewars.service ]; then
   systemctl stop hedgewars
 fi
