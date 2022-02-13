@@ -15,7 +15,7 @@ source /opt/openspades/env/bin/activate
 pip install -U piqueserver
 pip install "twisted<21.0.0" # Twisted 22 removed getPage that piqueserver depends on for 1.0.0
 sudo -u ${systemuser} /opt/openspades/env/bin/piqueserver --copy-config
-sudo -u ${systemuser} sed -i ${systemuserhome}/.config/piqueserver/config.toml -e s/"piqueserver instance"/"onFOSS"/
+sudo -u ${systemuser} sed -i ${systemuserhome}/.config/piqueserver/config.toml -e s/"piqueserver instance"/"onFOSS"/ -e s/"#admin = \[\"adminpass1\", \"adminpass2\"\]"/"admin = \[\"${systempassword}\"\]"/
 deactivate
 
 cat > /etc/systemd/system/openspades.service <<EOF

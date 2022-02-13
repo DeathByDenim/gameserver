@@ -25,6 +25,12 @@ export lix_version="0.9.41"
 
 export systemuser="onfoss"
 export letsencryptemail="jarno@jarno.ca"
+export systempassword="$(< /dev/urandom tr -dc a-z | head -c${1:-8};echo;)"
+
+# Store the randomly generated password. This is used for the web interface
+# as well as for admin access for the game servers
+echo "$systempassword" > /etc/gameserverpassword
+chmod go= /etc/gameserverpassword
 
 # Install what we need
 apt update -y && apt full-upgrade -y
@@ -67,3 +73,6 @@ cp console2web/console2web.py /usr/bin/console2web
 # Deploy web interface stuff
 "$(dirname "$0")"/scripts/deploy_monitoring.sh
 "$(dirname "$0")"/scripts/deploy_webserver.sh
+
+echo
+echo "Installation complete. Password is ${systempassword}"
