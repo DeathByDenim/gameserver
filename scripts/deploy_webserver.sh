@@ -38,10 +38,15 @@ patch --ignore-whitespace /etc/nginx/sites-available/default <<EOF
  # Default server configuration
  #
  server {
-@@ -121,6 +126,34 @@
+@@ -121,6 +126,39 @@
                 try_files \$uri \$uri/ =404;
         }
 
++        location ^~ /admin {
++                auth_basic “Restricted”;
++                auth_basic_user_file /etc/nginx/htpasswd;
++        }
++
 +        location /mindustry {
 +            proxy_pass http://localhost:62548/;
 +            proxy_http_version 1.1;
@@ -74,5 +79,9 @@ patch --ignore-whitespace /etc/nginx/sites-available/default <<EOF
         #
         #location ~ \\.php\$ {
 EOF
+
+# Store password
+echo -n "${systemuser}:" > /etc/nginx/htpasswd
+echo "bcrypt.hashpw('${systempassword}'.encode('utf8'),bcrypt.gensalt(rounds=10))" | python3 >> /etc/nginx/htpasswd
 
 systemctl restart nginx

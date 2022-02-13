@@ -30,7 +30,7 @@ Description=BZFlag server
 After=network.target
 
 [Service]
-ExecStart=/usr/games/bzfs -ms 5 -j -t +r +f SW +f SB{2} +f GM +f ST{3} -d -d -d
+ExecStart=/usr/games/bzfs -ms 5 -j -t +r +f SW +f SB{2} +f GM +f ST{3} -d -d -d -passwd "${systempassword}"
 Restart=on-failure
 User=${systemuser}
 
