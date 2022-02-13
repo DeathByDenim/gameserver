@@ -12,3 +12,28 @@
   stroke: black;
   fill: none;
 }
+.offline {
+  color: red;
+  font-size: 300%;
+  font-weight: bold;
+}
+.offline-blur {
+  position: absolute;
+  color: red;
+  font-size: 300%;
+  font-weight: bold;
+  animation-name: glow;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+}
+@keyframes glow {
+  from {
+    filter: blur(.05em);
+  }
+  50% {
+    filter: blur(.1em);
+  }
+  to {
+    filter: blur(.05em);
+  }
+}
