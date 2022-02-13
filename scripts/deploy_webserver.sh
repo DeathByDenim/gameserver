@@ -43,7 +43,7 @@ patch --ignore-whitespace /etc/nginx/sites-available/default <<EOF
         }
 
 +        location ^~ /admin {
-+                auth_basic “Restricted”;
++                auth_basic "Restricted";
 +                auth_basic_user_file /etc/nginx/htpasswd;
 +        }
 +
@@ -82,6 +82,6 @@ EOF
 
 # Store password
 echo -n "${systemuser}:" > /etc/nginx/htpasswd
-echo "bcrypt.hashpw('${systempassword}'.encode('utf8'),bcrypt.gensalt(rounds=10))" | python3 >> /etc/nginx/htpasswd
+echo -e "import bcrypt\nprint(bcrypt.hashpw('${systempassword}'.encode('utf8'),bcrypt.gensalt(rounds=10)).decode('utf8'))" | python3 >> /etc/nginx/htpasswd
 
 systemctl restart nginx
