@@ -11,6 +11,7 @@ The following games are deployed:
 
 * Bzflag
 * Hedgewars
+* Lix
 * Mindustry
 * OpenHV
 * OpenSpades
