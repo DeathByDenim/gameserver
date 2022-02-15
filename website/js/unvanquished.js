@@ -14,7 +14,7 @@ function unvanquished_init() {
   }
 
   // Create WebSocket connection.
-  const socket = new WebSocket("ws://192.168.122.229/unvanquished")
+  const socket = new WebSocket("wss://DOMAINNAME/unvanquished")
 
   // Connection opened
   socket.addEventListener('open', function (event) {

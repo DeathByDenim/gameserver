@@ -14,7 +14,7 @@ function mindustry_init() {
   }
 
   // Create WebSocket connection.
-  const socket = new WebSocket("ws://192.168.122.229/mindustry")
+  const socket = new WebSocket("wss://DOMAINNAME/mindustry")
 
   // Connection opened
   socket.addEventListener('open', function (event) {

@@ -5,12 +5,16 @@
 ### systems too
 ###
 ### Specify domain name:
-###   DOMAINNAME=example.com ./deploy.sh
+###   DOMAINNAME=example.com HOSTEDBYNAME=DeathByDenim ./deploy.sh
 
 set -e
 
 if [ -z $DOMAINNAME ]; then
   echo "Domain name was not set. Please export DOMAINNAME first"
+  exit 1
+fi
+if [ -z $HOSTEDBYNAME ]; then
+  echo "Hosted-by name was not set. Please export HOSTEDBYNAME first"
   exit 1
 fi
 

@@ -14,11 +14,11 @@ certbot -n --nginx -d ${DOMAINNAME} -d www.${DOMAINNAME} --agree-tos -m "${letse
 
 # Put the website files in place
 cp -r "$(dirname "$0")"/../website/* /var/www/html
-for file in $(grep -lR 192.168 /var/www/html/); do
-  sed -i $file -e s/"ws:\/\/"/"wss:\/\/"/g
+for file in /var/www/html/*\.html /var/www/html/js/*\.js; do
+  sed -i $file -e s/"DOMAINNAME"/"${DOMAINNAME}"/g
 done
-for file in $(grep -lR 192.168 /var/www/html/); do
-  sed -i $file -e s/"192\.168\.122\.229"/"${DOMAINNAME}"/g
+for file in /var/www/html/*\.html; do
+  sed -i $file -e s/"HOSTEDBYNAME"/"${HOSTEDBYNAME}"/g
 done
 
 # Patch the NGINX configuration for the web sockets

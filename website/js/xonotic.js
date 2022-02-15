@@ -14,7 +14,7 @@ function xonotic_init() {
   }
 
   // Create WebSocket connection.
-  const socket = new WebSocket("ws://192.168.122.229/xonotic")
+  const socket = new WebSocket("wss://DOMAINNAME/xonotic")
 
   // Connection opened
   socket.addEventListener('open', function (event) {
