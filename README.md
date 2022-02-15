@@ -26,6 +26,6 @@ It is based on https://git.libregaming.org/c/onFOSS-LAN-Serverconfiguration
 
 The main script is `deploy.sh`. You only need to give if your domain name
 ```
-DOMAINNAME=play.jarno.ca ./deploy.sh
+DOMAINNAME=play.jarno.ca  HOSTEDBYNAME=DeathByDenim ./deploy.sh
 ```
 This will download all the game servers, install them, configure them, and start them up. It also retrieves a certificate for Let's Encrypt for the web interface.
