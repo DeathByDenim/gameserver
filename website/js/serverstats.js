@@ -35,7 +35,7 @@ function updateGraph(data, svgid, property_class, property) {
 }
 
 function update() {
-  d3.json('https://play.jarno.ca/monitoring/all').then(function(data){
+  d3.json('https://DOMAINNAME/monitoring/all').then(function(data){
     updateGraph(data, '#memgraph', 'mem', 'm');
     updateGraph(data, '#cpugraph', 'cpu', 'c');
   });
