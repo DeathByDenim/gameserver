@@ -10,7 +10,9 @@ firewall-cmd --zone=public --add-service=https --permanent
 firewall-cmd --reload
 
 # Request SSL certificate. This assumes DNS has been set up already
-certbot -n --nginx -d ${DOMAINNAME} -d www.${DOMAINNAME} --agree-tos -m "${letsencryptemail}"
+if [ $NOSSL -ne 1 ]; then
+  certbot -n --nginx -d ${DOMAINNAME} -d www.${DOMAINNAME} --agree-tos -m "${letsencryptemail}"
+fi
 
 # Put the website files in place
 cp -r "$(dirname "$0")"/../website/* /var/www/html
@@ -20,6 +22,11 @@ done
 for file in /var/www/html/*\.html; do
   sed -i $file -e s/"HOSTEDBYNAME"/"${HOSTEDBYNAME}"/g
 done
+if [ $NOSSL -eq 1 ]; then
+  for file in /var/www/html/js/*\.js; do
+    sed -i $file -e s/"wss:"/"ws:"/g
+  done
+fi
 
 # Patch the NGINX configuration for the web sockets
 cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
