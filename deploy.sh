@@ -73,6 +73,7 @@ cp console2web/console2web.py /usr/bin/console2web
 "$(dirname "$0")"/scripts/deploy_teeworlds.sh
 "$(dirname "$0")"/scripts/deploy_unvanquished.sh
 "$(dirname "$0")"/scripts/deploy_xonotic.sh
+"$(dirname "$0")"/scripts/deploy_armagetron_advanced.sh
 
 # Deploy web interface stuff
 "$(dirname "$0")"/scripts/deploy_monitoring.sh
