@@ -41,6 +41,7 @@ cat > /etc/systemd/system/xonotic.service <<EOF
 [Unit]
 Description=Xonotic server
 After=network.target
+Conflicts=xonotic-br.service
 
 [Service]
 WorkingDirectory=${xonotic_directory}/Xonotic
