@@ -29,5 +29,15 @@ EOF
 systemctl daemon-reload
 systemctl enable --now mindustry.service
 
+cat > /etc/nginx/gameserver.d/mindustry.conf <<EOF
+location /mindustry {
+    proxy_pass http://localhost:62548/;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade \$http_upgrade;
+    proxy_set_header Connection "Upgrade";
+    proxy_set_header Host \$host;
+}
+EOF
+
 firewall-cmd --zone=public --add-port=6567/tcp --permanent
 firewall-cmd --zone=public --add-port=6567/udp --permanent

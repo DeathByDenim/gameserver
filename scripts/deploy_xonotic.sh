@@ -55,4 +55,14 @@ EOF
 systemctl daemon-reload
 systemctl enable --now xonotic.service
 
+cat > /etc/nginx/gameserver.d/xonotic.conf <<EOF
+location /xonotic {
+    proxy_pass http://localhost:62550/;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade \$http_upgrade;
+    proxy_set_header Connection "Upgrade";
+    proxy_set_header Host \$host;
+}
+EOF
+
 firewall-cmd --zone=public --add-port=26000/udp --permanent

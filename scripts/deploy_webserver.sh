@@ -45,7 +45,7 @@ patch --ignore-whitespace /etc/nginx/sites-available/default <<EOF
  # Default server configuration
  #
  server {
-@@ -121,6 +126,39 @@
+@@ -121,6 +126,17 @@
                 try_files \$uri \$uri/ =404;
         }
 
@@ -54,29 +54,7 @@ patch --ignore-whitespace /etc/nginx/sites-available/default <<EOF
 +                auth_basic_user_file /etc/nginx/htpasswd;
 +        }
 +
-+        location /mindustry {
-+            proxy_pass http://localhost:62548/;
-+            proxy_http_version 1.1;
-+            proxy_set_header Upgrade \$http_upgrade;
-+            proxy_set_header Connection "Upgrade";
-+            proxy_set_header Host \$host;
-+        }
-+
-+        location /unvanquished {
-+            proxy_pass http://localhost:62549/;
-+            proxy_http_version 1.1;
-+            proxy_set_header Upgrade \$http_upgrade;
-+            proxy_set_header Connection "Upgrade";
-+            proxy_set_header Host \$host;
-+        }
-+
-+        location /xonotic {
-+            proxy_pass http://localhost:62550/;
-+            proxy_http_version 1.1;
-+            proxy_set_header Upgrade \$http_upgrade;
-+            proxy_set_header Connection "Upgrade";
-+            proxy_set_header Host \$host;
-+        }
++        include /etc/nginx/gameserver.d/*.conf;
 +
 +        location /monitoring/ {
 +            proxy_pass http://localhost:9000/;
@@ -86,6 +64,8 @@ patch --ignore-whitespace /etc/nginx/sites-available/default <<EOF
         #
         #location ~ \\.php\$ {
 EOF
+
+mkdir -p /etc/nginx/gameserver.d
 
 # Store password
 echo -n "${systemuser}:" > /etc/nginx/htpasswd

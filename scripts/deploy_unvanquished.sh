@@ -51,4 +51,14 @@ EOF
 systemctl daemon-reload
 systemctl enable --now unvanquished.service
 
+cat > /etc/nginx/gameserver.d/unvanquished.conf <<EOF
+location /unvanquished {
+    proxy_pass http://localhost:62549/;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade \$http_upgrade;
+    proxy_set_header Connection "Upgrade";
+    proxy_set_header Host \$host;
+}
+EOF
+
 firewall-cmd --zone=public --add-port=27960/udp --permanent
