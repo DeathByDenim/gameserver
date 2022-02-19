@@ -5,6 +5,14 @@ if [ -e /etc/systemd/system/openspades.service ]; then
   systemctl stop openspades
 fi
 
+# Smallish maps from https://github.com/kinvaris/openspades-maps
+## island
+## nuketown (broken)
+## pinpoint
+## Realistic Bridge
+## Rocket Island
+## Submarine
+
 # OpenSpades
 mkdir -p /opt/openspades
 if [ -d /opt/openspades/env ]; then
