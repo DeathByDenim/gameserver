@@ -5,7 +5,7 @@ if [ -e /lib/systemd/system/armagetronad-dedicated.service ]; then
   systemctl stop armagetronad-dedicated
 fi
 
-apt install armagetronad-dedicated
+apt install --assume-yes armagetronad-dedicated
 
 # Override unit file to use console2web
 cat > /etc/systemd/system/armagetronad-dedicated.service.d/override.conf <<EOF
