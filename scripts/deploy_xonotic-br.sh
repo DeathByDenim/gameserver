@@ -5,9 +5,9 @@ if [ -e /etc/systemd/system/xonotic-br.service ]; then
   systemctl stop xonotic-br
 fi
 
-apt install autoconf automake build-essential curl git libtool libgmp-dev \
-            libjpeg62-turbo-dev libsdl2-dev libxpm-dev xserver-xorg-dev \
-            zlib1g-dev unzip zip
+apt install --assume-yes autoconf automake build-essential curl git libtool \
+  libgmp-dev libjpeg62-turbo-dev libsdl2-dev libxpm-dev xserver-xorg-dev \
+  zlib1g-dev unzip zip
 
 # Xonotic Battle Royale branch
 xonotic_directory="/opt/xonotic-br"
