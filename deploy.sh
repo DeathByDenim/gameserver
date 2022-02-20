@@ -80,5 +80,6 @@ cp console2web/console2web.py /usr/bin/console2web
 "$(dirname "$0")"/scripts/deploy_xonotic-br.sh
 "$(dirname "$0")"/scripts/deploy_armagetron_advanced.sh
 
+firewall-cmd --reload
 echo
 echo "Installation complete. Password is ${systempassword}"
