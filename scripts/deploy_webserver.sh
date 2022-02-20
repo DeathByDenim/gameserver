@@ -10,7 +10,7 @@ firewall-cmd --zone=public --add-service=https --permanent
 firewall-cmd --reload
 
 # Request SSL certificate. This assumes DNS has been set up already
-if [ -n $NOSSL ] && [ $NOSSL -ne 1 ]; then
+if [ -n $NOSSL ] || [ $NOSSL -ne 1 ]; then
   certbot -n --nginx -d ${DOMAINNAME} -d www.${DOMAINNAME} --agree-tos -m "${letsencryptemail}"
 fi
 
