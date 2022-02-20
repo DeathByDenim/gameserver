@@ -28,7 +28,7 @@ maxplayers 64
 port 26000
 log_file "server.log"
 g_start_delay 15
-g_maplist "implosion glowplant dance geoplanetary"
+g_maplist "implosion glowplant dance geoplanetary xoylent"
 g_maplist_shuffle 1
 gametype br
 rcon_password "onFOSS"
