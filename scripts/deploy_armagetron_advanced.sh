@@ -8,6 +8,7 @@ fi
 apt install --assume-yes armagetronad-dedicated
 
 # Override unit file to use console2web
+mkdir -p /etc/systemd/system/armagetronad-dedicated.service.d
 cat > /etc/systemd/system/armagetronad-dedicated.service.d/override.conf <<EOF
 [Service]
 ExecStart=
