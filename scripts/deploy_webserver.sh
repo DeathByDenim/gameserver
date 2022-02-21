@@ -15,12 +15,16 @@ if [ x"$NOSSL" = "x" ] || [ $NOSSL -ne 1 ]; then
 fi
 
 # Put the website files in place
-cp -r "$(dirname "$0")"/../website/* /var/www/html
+cp -r "$(dirname "$0")"/../website/[^_]* /var/www/html
 for file in /var/www/html/*\.html /var/www/html/js/*\.js; do
   sed -i $file -e s/"DOMAINNAME"/"${DOMAINNAME}"/g
 done
 for file in /var/www/html/*\.html; do
   sed -i $file -e s/"HOSTEDBYNAME"/"${HOSTEDBYNAME}"/g
+done
+for file in ${webroot}/*\.html; do
+  sed -i $file -e "/SERVERSTATE/r $(dirname "$0")/website/_state/online.html"
+  sed -i $file -e "/SERVERSTATE/d"
 done
 if [ $NOSSL -eq 1 ]; then
   for file in /var/www/html/js/*\.js; do
