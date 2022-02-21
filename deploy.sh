@@ -29,12 +29,16 @@ export lix_version="0.9.41"
 
 export systemuser="onfoss"
 export letsencryptemail="jarno@jarno.ca"
-export systempassword="$(< /dev/urandom tr -dc a-z | head -c${1:-8};echo;)"
 
 # Store the randomly generated password. This is used for the web interface
 # as well as for admin access for the game servers
-echo "$systempassword" > /etc/gameserverpassword
-chmod go= /etc/gameserverpassword
+if [ -f /etc/gameserverpassword ]; then
+  export systempassword=$(cat /etc/gameserverpassword)
+else
+  export systempassword="$(< /dev/urandom tr -dc a-z | head -c${1:-8};echo;)"
+  echo "$systempassword" > /etc/gameserverpassword
+  chmod go= /etc/gameserverpassword
+fi
 
 # Install what we need
 apt update -y && apt full-upgrade -y
