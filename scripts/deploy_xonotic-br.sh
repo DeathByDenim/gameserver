@@ -11,7 +11,7 @@ apt install --assume-yes autoconf automake build-essential curl git libtool \
 
 # Xonotic Battle Royale branch
 xonotic_directory="/opt/xonotic-br"
-mkdir -p "${xonotic_directory}"
+rm -rf ${xonotic_directory}
 git clone https://gitlab.com/xonotic/xonotic.git ${xonotic_directory}
 cd ${xonotic_directory}
 ./all update -l best
