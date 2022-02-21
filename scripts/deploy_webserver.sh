@@ -22,7 +22,7 @@ done
 for file in /var/www/html/*\.html; do
   sed -i $file -e s/"HOSTEDBYNAME"/"${HOSTEDBYNAME}"/g
 done
-for file in ${webroot}/*\.html; do
+for file in /var/www/html/*\.html; do
   sed -i $file -e "/SERVERSTATE/r $(dirname "$0")/website/_state/online.html"
   sed -i $file -e "/SERVERSTATE/d"
 done
