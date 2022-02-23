@@ -21,7 +21,7 @@ fi
 export stk_version="1.3"
 export bzflag_version="2.4"
 export mindustry_version="135"
-export openhv_version="20220128"
+export openhv_version="20220221"
 export teeworlds_version="0.7.5"
 export unvanquished_version="0.52.1"
 export xonotic_version="0.8.2"
