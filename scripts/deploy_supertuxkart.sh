@@ -37,3 +37,6 @@ EOF
 
 systemctl daemon-reload
 systemctl enable --now supertuxkart.service
+
+firewall-cmd --zone=public --add-port=2759/udp --permanent
+firewall-cmd --zone=public --add-port=2757/udp --permanent
