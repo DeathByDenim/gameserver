@@ -23,12 +23,13 @@ for file in /var/www/html/*\.html; do
   sed -i $file -e s/"HOSTEDBYNAME"/"${HOSTEDBYNAME}"/g
 done
 for file in /var/www/html/*\.html; do
-  sed -i $file -e "/SERVERSTATE/r $(dirname "$0")/website/_state/online.html"
+  sed -i $file -e "/SERVERSTATE/r $(dirname "$0")/../website/_state/online.html"
   sed -i $file -e "/SERVERSTATE/d"
 done
 if [ $NOSSL -eq 1 ]; then
   for file in /var/www/html/js/*\.js; do
     sed -i $file -e s/"wss:"/"ws:"/g
+    sed -i $file -e s/"https:"/"http:"/g
   done
 fi
 
