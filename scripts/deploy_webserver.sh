@@ -35,7 +35,7 @@ fi
 
 # Patch the NGINX configuration for the web sockets
 cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
-patch --ignore-whitespace /etc/nginx/sites-available/default <<EOF
+patch --ignore-whitespace --force /etc/nginx/sites-available/default <<EOF
 --- default.bak 2022-02-09 12:00:07.665387879 +0000
 +++ default     2022-02-09 12:02:41.083719671 +0000
 @@ -16,6 +16,11 @@
@@ -50,7 +50,7 @@ patch --ignore-whitespace /etc/nginx/sites-available/default <<EOF
  # Default server configuration
  #
  server {
-@@ -121,6 +126,17 @@
+@@ -121,6 +126,20 @@
                 try_files \$uri \$uri/ =404;
         }
 
@@ -59,6 +59,9 @@ patch --ignore-whitespace /etc/nginx/sites-available/default <<EOF
 +                auth_basic_user_file /etc/nginx/htpasswd;
 +        }
 +
++        proxy_connect_timeout 1d;
++        proxy_send_timeout 1d;
++        proxy_read_timeout 1d;
 +        include /etc/nginx/gameserver.d/*.conf;
 +
 +        location /monitoring/ {
