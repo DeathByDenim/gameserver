@@ -21,7 +21,7 @@
   --terminal-color-background: rgb(30,34,41);
 }
 
-#mindustry_output {
+.console_output {
   border: solid grey;
   background-color: var(--terminal-color-background);
   width: min(95%, 1024px);
@@ -32,90 +32,25 @@
   flex-direction: column-reverse;
 }
 
-#mindustry_output p {
+.console_output p {
   margin: 0;
   padding: 0;
   font-family: monospace;
-  /* font-weight: bold; */
   white-space: pre-wrap;
-  /* word-break: break-all; */
   color: var(--terminal-color-default);
   display: inline-block;
 }
 
-#mindustry_command {
+.user_input::before {
+  content: '$ ';
+  color: var(--terminal-color-7-intense);
+}
+
+.console_command {
   width: calc(min(95%, 1024px) - 10em);
 }
 
-#mindustry_submit {
-  width: 10em;
-  padding: 0;
-  margin: 0;
-  border-radius: 0;
-  text-shadow: 0;
-}
-
-#unvanquished_output {
-  border: solid grey;
-  background-color: var(--terminal-color-background);
-  width: min(95%, 1024px);
-  height: 20em;
-  overflow-x: hidden;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column-reverse;
-}
-
-#unvanquished_output p {
-  margin: 0;
-  padding: 0;
-  font-family: monospace;
-  /* font-weight: bold; */
-  white-space: pre-wrap;
-  /* word-break: break-all; */
-  color: var(--terminal-color-default);
-  display: inline-block;
-}
-
-#unvanquished_command {
-  width: calc(min(95%, 1024px) - 10em);
-}
-
-#unvanquished_submit {
-  width: 10em;
-  padding: 0;
-  margin: 0;
-  border-radius: 0;
-  text-shadow: 0;
-}
-
-#xonotic_output {
-  border: solid grey;
-  background-color: var(--terminal-color-background);
-  width: min(95%, 1024px);
-  height: 20em;
-  overflow-x: hidden;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column-reverse;
-}
-
-#xonotic_output p {
-  margin: 0;
-  padding: 0;
-  font-family: monospace;
-  /* font-weight: bold; */
-  white-space: pre-wrap;
-  /* word-break: break-all; */
-  color: var(--terminal-color-default);
-  display: inline-block;
-}
-
-#xonotic_command {
-  width: calc(min(95%, 1024px) - 10em);
-}
-
-#xonotic_submit {
+.console_submit {
   width: 10em;
   padding: 0;
   margin: 0;
