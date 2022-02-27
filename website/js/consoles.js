@@ -1,4 +1,10 @@
 function createConsole(root, game_name, text_colour_function, initial_command) {
+  const div_card = document.createElement('div');
+  const div_card_header = document.createElement('div');
+  const h5 = document.createElement('h5');
+  const card_button = document.createElement('button');
+  const div_collapse = document.createElement('div');
+  const div_card_body = document.createElement('div');
   const header = document.createElement('h4');
   const output = document.createElement('div');
   const output_text = document.createElement('p');
@@ -6,7 +12,14 @@ function createConsole(root, game_name, text_colour_function, initial_command) {
   const input_text = document.createElement('input');
   const input_submit = document.createElement('button');
 
-  header.innerText = game_name[0].toUpperCase() + game_name.substr(1);
+  div_card.className = "card";
+  div_card_header.className = "card-header";
+  h5.className = "mb-0";
+  card_button.className = "btn btn-link";
+  card_button.innerText = game_name[0].toUpperCase() + game_name.substr(1);
+  div_collapse.className = "collapse";
+  div_card_body.className = "card-body";
+
   output.id = game_name + "_output";
   output.className = "console_output";
   output_text.innerText = game_name + " console";
@@ -20,12 +33,18 @@ function createConsole(root, game_name, text_colour_function, initial_command) {
   input_submit.className = "console_submit";
   input_submit.innerText = "Enter";
 
-  root.appendChild(header);
+  root.appendChild(div_card);
+  div_card.appendChild(div_card_header);
+  div_card_header.appendChild(h5);
+  h5.appendChild(card_button);
+  div_card.appendChild(div_collapse);
+  div_collapse.appendChild(div_card_body);
+
   output.appendChild(output_text);
-  root.appendChild(output);
+  div_card_body.appendChild(output);
   input.appendChild(input_text);
   input.appendChild(input_submit);
-  root.appendChild(input);
+  div_card_body.appendChild(input);
 
   input.addEventListener('submit', function(e){
     e.preventDefault();
@@ -38,7 +57,6 @@ function createConsole(root, game_name, text_colour_function, initial_command) {
   });
 
   // Create WebSocket connection.
-  // const socket = new WebSocket("wss://DOMAINNAME/" + game_name)
   const socket = new WebSocket("wss://DOMAINNAME/" + game_name)
 
   // Connection opened
@@ -65,6 +83,21 @@ function consoles_init() {
   createConsole(root, 'unvanquished', convertDaemonedCodeToHtml, '/status');
   createConsole(root, 'xonotic', convertTerminalCodeToHtml, 'who');
 
+  collapse_init();
+}
+
+function collapse_init() {
+  const bars = document.getElementsByClassName('card-header');
+  for(let bar of bars) {
+    bar.addEventListener('click', function(e) {
+      const bartexts = document.getElementsByClassName('collapse');
+      for(let bartext of bartexts) {
+        bartext.classList.remove("show");
+      }
+      this.parentElement.children[1].classList.add("show");
+    })
+  }
+  document.getElementsByClassName('collapse')[0].classList.add("show");
 }
 
 if (document.readyState === 'loading') {
