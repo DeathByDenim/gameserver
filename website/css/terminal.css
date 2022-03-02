@@ -47,11 +47,19 @@
 }
 
 .console_command {
-  width: calc(min(95%, 1024px) - 10em);
+  width: calc(min(95%, 1024px) - 8em);
 }
 
 .console_submit {
-  width: 10em;
+  width: 6em;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  text-shadow: 0;
+}
+
+.console_help {
+  width: 2em;
   padding: 0;
   margin: 0;
   border-radius: 0;

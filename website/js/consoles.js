@@ -1,4 +1,4 @@
-function createConsole(root, game_name, text_colour_function, initial_command) {
+function createConsole(root, game_name, text_colour_function, initial_command, help_url, tooltip) {
   const div_card = document.createElement('div');
   const div_card_header = document.createElement('div');
   const h5 = document.createElement('h5');
@@ -11,6 +11,7 @@ function createConsole(root, game_name, text_colour_function, initial_command) {
   const input = document.createElement('form');
   const input_text = document.createElement('input');
   const input_submit = document.createElement('button');
+  const input_help = document.createElement('button');
 
   div_card.className = "card";
   div_card_header.className = "card-header";
@@ -29,9 +30,17 @@ function createConsole(root, game_name, text_colour_function, initial_command) {
   input_text.className = "console_command";
   input_text.size = 80;
   input_text.autocomplete = "off";
+  if(tooltip) {
+    input_text.title = tooltip;
+  }
   input_submit.id = game_name + "_submit";
   input_submit.className = "console_submit";
   input_submit.innerText = "Enter";
+  input_help.id = game_name + "_submit";
+  input_help.className = "console_help";
+  input_help.innerText = "?";
+
+
 
   root.appendChild(div_card);
   div_card.appendChild(div_card_header);
@@ -44,7 +53,13 @@ function createConsole(root, game_name, text_colour_function, initial_command) {
   div_card_body.appendChild(output);
   input.appendChild(input_text);
   input.appendChild(input_submit);
+  input.appendChild(input_help);
   div_card_body.appendChild(input);
+
+  input_help.addEventListener('click', function(e) {
+    e.preventDefault();
+    window.open(help_url, '_blank');
+  });
 
   input.addEventListener('submit', function(e){
     e.preventDefault();
@@ -79,10 +94,38 @@ function createConsole(root, game_name, text_colour_function, initial_command) {
 
 function consoles_init() {
   const root = document.getElementById('console-div');
-  createConsole(root, 'armagetronad', convertTerminalCodeToHtml, 'players');
-  createConsole(root, 'mindustry', convertTerminalCodeToHtml, 'status');
-  createConsole(root, 'unvanquished', convertDaemonedCodeToHtml, '/status');
-  createConsole(root, 'xonotic', convertTerminalCodeToHtml, 'who');
+  createConsole(
+    root,
+    'armagetronad',
+    convertTerminalCodeToHtml,
+    'players',
+    'http://wiki.armagetronad.org/index.php?title=Console_Commands',
+    "Helpful commands:\n• players\tShow current players\n• kick <name>\tKick the player\n• num_ais <num>\tSet the number of AIs for games with more than one player.\n• limit_rounds\tEnd the match after this number of rounds"
+  );
+  createConsole(
+    root,
+    'mindustry',
+    convertTerminalCodeToHtml,
+    'status',
+    'https://mindustrygame.github.io/wiki/servers/#dedicated-server-commands',
+    "Helpful commands:\n• status\tDisplay server status\n• runwave\tTrigger the next wave\n• kick <name>\tKick a person by name"
+  );
+  createConsole(
+    root,
+    'unvanquished',
+    convertDaemonedCodeToHtml,
+    '/status',
+    'https://wiki.unvanquished.net/wiki/Server/Running#Commands',
+    "Helpful commands:\n• /listplayers\tList current players in-game\n• /kick <name>\tKick the player\n• /nextmap\tGo to the next map in the rotation"
+  );
+  createConsole(
+    root,
+    'xonotic',
+    convertTerminalCodeToHtml,
+    'who',
+    'https://gitlab.com/xonotic/xonotic/-/wikis/Basic-server-configuration',
+    "Helpful commands:\n• who\tList current players in-game\n• kick <name>\tKick the player\n• gotomap <name>\tGo to the specified map"
+  );
 
   collapse_init();
 }
