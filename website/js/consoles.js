@@ -79,6 +79,7 @@ function createConsole(root, game_name, text_colour_function, initial_command) {
 
 function consoles_init() {
   const root = document.getElementById('console-div');
+  createConsole(root, 'armagetronad', convertTerminalCodeToHtml, 'players');
   createConsole(root, 'mindustry', convertTerminalCodeToHtml, 'status');
   createConsole(root, 'unvanquished', convertDaemonedCodeToHtml, '/status');
   createConsole(root, 'xonotic', convertTerminalCodeToHtml, 'who');
