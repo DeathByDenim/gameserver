@@ -46,10 +46,16 @@
           <p>Next event is Saturday 19 March 2022, 14:00 UTC<script>d=new Date("Sat, 19 Mar 2022 14:00:00 UTC");document.writeln(" ("+ Intl.DateTimeFormat(undefined, {hour: '2-digit', minute: '2-digit', timeZoneName: 'short'}).format(d) + ")")</script>, see <a href="schedule.html">schedule</a>.</p>
           <p>
             Additionally, I am running a fundraiser to help the people suffering
-            from the war in Ukraine 🇺🇦. I will match your donation (up to $500 total)
-            and additionally, the government of Canada 🇨🇦 will match mine until 18 March. So,
-            that's triple the value for any donation you make. It doesn't have
-            to be to the Canadian Red Cross, you probably have a local equivalent.
+            from the war in Ukraine &#x1F1FA;&#x1F1E6;. I will match your donation
+            (up to $500 total) and additionally, the government of Canada
+            &#x1F1E8;&#x1F1E6; will match mine until 18 March. So, that's triple
+            the value for any donation you make. It doesn't have to be to the
+            Canadian Red Cross, you probably have a local equivalent.
+          </p>
+          <p>
+            <em>UPDATE (2022-03-08)</em>: Canada reached the $10M already so they are not
+            doubling anymore. I'll still double but this means your amount won't
+            count as triple anymore.
           </p>
           <p>
             Donations are based on the honour system since dealing with money
@@ -59,6 +65,26 @@
             <a href="https://matrix.to/&#35;/@jarno:matrix.jarno.ca">Matrix</a>,
             <a href="mailto:jarno@jarno.ca">e-mail</a> or in the Matrix/XMPP
             channels listed below.
+          </p>
+          <p>
+            You can also use this form. Simply don't fill in your name if you
+            wish to remain anonymous.
+            <form action="donate" method="post">
+              <div class="row g-4 align-items-center">
+                <div class="col-auto">
+                  <input type="text" class="form-control" name="name" placeholder="Your name">
+                </div>
+                <div class="col-auto">
+                  <input type="text" required name="currency" placeholder="Currency such as CAD or EUR">
+                </div>
+                <div class="col-auto">
+                  <input type="number" required name="amount" step="0.01" min="0" placeholder="Amount">
+                </div>
+                <div class="col-auto">
+                  <input type="submit" value="Submit">
+                </div>
+              </div>
+            </form>
           </p>
           <p>
             And of course you don't have to donate to join the event!
