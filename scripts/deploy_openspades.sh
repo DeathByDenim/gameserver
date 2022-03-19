@@ -21,7 +21,8 @@ fi
 virtualenv -p python3 /opt/openspades/env
 source /opt/openspades/env/bin/activate
 pip install -U piqueserver
-pip install "twisted<21.0.0" # Twisted 22 removed getPage that piqueserver depends on for 1.0.0
+pip install "twisted<21.0.0" # Twisted 22 removed getPage that piqueserver 1.0.0 depends on
+pip install "MarkupSafe==2.0.1" # MarkupSafe removed soft_unicode that piqueserver 1.0.0 depends on
 sudo -u ${systemuser} /opt/openspades/env/bin/piqueserver --copy-config
 sudo -u ${systemuser} sed -i ${systemuserhome}/.config/piqueserver/config.toml -e s/"piqueserver instance"/"onFOSS"/ -e s/"#admin = \[\"adminpass1\", \"adminpass2\"\]"/"admin = \[\"${systempassword}\"\]"/
 deactivate
