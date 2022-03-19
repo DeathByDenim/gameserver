@@ -18,7 +18,7 @@ firewall-cmd --zone=public --add-port=2757/udp --permanent
 firewall-cmd --zone=public --add-port=2759/udp --permanent
 
 # Configuration
-cp $(dirname $0)/../config/supertuxkart.xml /etc/supertuxkart.xml
+cp $(dirname $0)/../configs/supertuxkart.xml /etc/supertuxkart.xml
 
 # Create SystemD unit
 cat > /etc/systemd/system/supertuxkart.service <<EOF
