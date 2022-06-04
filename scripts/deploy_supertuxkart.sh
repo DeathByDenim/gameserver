@@ -1,7 +1,6 @@
 #!/bin/sh
 
 echo "Installing SuperTuxKart ${stk_version}"
-exit
 
 if [ -e /etc/systemd/system/supertuxkart.service ]; then
   systemctl stop supertuxkart
