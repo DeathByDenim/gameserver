@@ -84,6 +84,7 @@ cp console2web/console2web.py /usr/bin/console2web
 "$(dirname "$0")"/scripts/deploy_xonotic-br.sh
 "$(dirname "$0")"/scripts/deploy_armagetron_advanced.sh
 "$(dirname "$0")"/scripts/deploy_soldat.sh
+"$(dirname "$0")"/scripts/deploy_supertuxparty.sh
 
 # Apply all pending firewall rules. NGINX shouldn't have to be restarted, but it seems to help.
 firewall-cmd --reload
