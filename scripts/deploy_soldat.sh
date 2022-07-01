@@ -6,7 +6,7 @@ if [ -e /etc/systemd/system/soldat.service ]; then
 fi
 
 # Install dependencies
-sudo apt-get install build-essential g++ cmake git fpc libprotobuf-dev protobuf-compiler libssl-dev libsdl2-dev libopenal-dev libphysfs-dev libfreetype6
+sudo apt-get -y install build-essential g++ cmake git fpc libprotobuf-dev protobuf-compiler libssl-dev libsdl2-dev libopenal-dev libphysfs-dev libfreetype6
 
 # Install BZFlag
 builddir=${TMPDIR:-/tmp}/soldat-build
