@@ -8,7 +8,7 @@ fi
 # Install Lix
 mkdir -p /opt/supertuxparty
 curl 'https://supertux.party/download/latest/server.zip' > ${TMPDIR:/tmp}/server.zip
-unzip -d /opt/supertuxparty ${TMPDIR:/tmp}/server.zip
+unzip -o -d /opt/supertuxparty ${TMPDIR:/tmp}/server.zip
 rm ${TMPDIR:/tmp}/server.zip
 
 # Create SystemD unit
