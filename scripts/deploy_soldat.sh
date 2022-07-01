@@ -31,7 +31,7 @@ fi
 
 rm -rf ${builddir}
 
-cat > /opt/soldat/bin/configs/server.cfg <<EOF
+cat > /opt/soldat/bin/configs/server_dm.cfg <<EOF
 sv_hostname "onFOSS LAN"
 bots_random_alpha 0
 sv_gamemode 0
@@ -39,6 +39,18 @@ sv_greeting "Welcome to the onFOSS LAN server"
 sv_website ${DOMAINNAME}
 bots_chat false
 EOF
+
+cat > /opt/soldat/bin/configs/server_ctf.cfg <<EOF
+sv_hostname "onFOSS LAN"
+bots_random_alpha 0
+sv_gamemode 3
+sv_greeting "Welcome to the onFOSS LAN server"
+sv_website ${DOMAINNAME}
+bots_chat false
+sv_maplist "mapslist_ctf.txt"
+EOF
+
+ln -s ./server_dm.cfg /opt/soldat/bin/configs/server.cfg
 
 cat > /opt/soldat/bin/configs/mapslist.txt <<EOF
 Aero
@@ -51,8 +63,28 @@ Blox
 Bridge
 Bunker
 Cambodia
-changelog.txt
 CrackedBoot
+Daybreak
+DesertWind
+Factory
+Flashback
+HH
+Island2k5
+Jungle
+Krab
+Lagrange
+Leaf
+MrSnowman
+RatCave
+Rok
+RR
+Shau
+Tropiccave
+Unlim
+Veoto
+EOF
+
+cat > /opt/soldat/bin/configs/mapslist_ctf.txt <<EOF
 ctf_Aftermath
 ctf_Amnesia
 ctf_Ash
@@ -87,11 +119,9 @@ ctf_Viet
 ctf_Voland
 ctf_Wretch
 ctf_X
-Daybreak
-DesertWind
-Factory
-Flashback
-HH
+EOF
+
+cat > /opt/soldat/bin/configs/mapslist_htf.txt <<EOF
 htf_Arch
 htf_Baire
 htf_Boxed
@@ -111,6 +141,9 @@ htf_Tower
 htf_Void
 htf_Vortex
 htf_Zajacz
+EOF
+
+cat > /opt/soldat/bin/configs/mapslist_inf.txt <<EOF
 inf_Abel
 inf_April
 inf_Argy
@@ -128,19 +161,6 @@ inf_Rescue
 inf_Rise
 inf_Warehouse
 inf_Warlock
-Island2k5
-Jungle
-Krab
-Lagrange
-Leaf
-MrSnowman
-RatCave
-Rok
-RR
-Shau
-Tropiccave
-Unlim
-Veoto
 EOF
 
 chown -R ${systemuser}: /opt/soldat/bin/configs
