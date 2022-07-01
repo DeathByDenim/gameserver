@@ -185,3 +185,4 @@ systemctl enable --now soldat.service
 
 # Add firewall rules
 firewall-cmd --zone=public --add-port=23073/udp --permanent
+firewall-cmd --zone=public --add-port=23083/tcp --permanent
