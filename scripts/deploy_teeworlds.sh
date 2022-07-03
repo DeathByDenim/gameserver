@@ -51,6 +51,7 @@ cat > /etc/systemd/system/teeworlds.service <<EOF
 [Unit]
 Description=Teeworlds server
 After=network.target
+Conflicts=teeworlds-ddrace.service
 
 [Service]
 ExecStart=${teeworld_directory}/teeworlds_srv -f /etc/teeworlds.cfg

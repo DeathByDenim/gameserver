@@ -23,6 +23,7 @@ export bzflag_version="2.4"
 export mindustry_version="135"
 export openhv_version="20220221"
 export teeworlds_version="0.7.5"
+export teeworldsddrace_version="16.1"
 export unvanquished_version="0.52.1"
 export xonotic_version="0.8.2"
 export lix_version="0.9.41"
@@ -79,6 +80,7 @@ cp console2web/console2web.py /usr/bin/console2web
 "$(dirname "$0")"/scripts/deploy_openhv.sh
 "$(dirname "$0")"/scripts/deploy_openspades.sh
 "$(dirname "$0")"/scripts/deploy_teeworlds.sh
+"$(dirname "$0")"/scripts/deploy_teeworlds-ddrace.sh
 "$(dirname "$0")"/scripts/deploy_unvanquished.sh
 "$(dirname "$0")"/scripts/deploy_xonotic.sh
 "$(dirname "$0")"/scripts/deploy_xonotic-br.sh
