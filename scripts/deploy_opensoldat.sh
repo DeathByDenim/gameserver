@@ -15,9 +15,9 @@ cd ${builddir}
 if [ -d soldat ]; then
   rm -rf soldat
 fi
-git clone https://github.com/Soldat/soldat.git
-git clone https://github.com/Soldat/base.git
-cd soldat
+git clone https://github.com/opensoldat/opensoldat.git
+git clone https://github.com/opensoldat/base.git
+cd opensoldat
 mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=/opt/soldat ..
 make
@@ -50,7 +50,9 @@ bots_chat false
 sv_maplist "mapslist_ctf.txt"
 EOF
 
-ln -s ./server_dm.cfg /opt/soldat/bin/configs/server.cfg
+if ! [ -L /opt/soldat/bin/configs/server.cfg ]; then
+  ln -s ./server_dm.cfg /opt/soldat/bin/configs/server.cfg
+fi
 
 cat > /opt/soldat/bin/configs/mapslist.txt <<EOF
 Aero
