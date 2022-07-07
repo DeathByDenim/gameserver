@@ -5,6 +5,10 @@ if [ -e /etc/systemd/system/openhv.service ]; then
   systemctl stop openhv
 fi
 
+if [ -z ${openhv_version} ] || [ "${openhv_version}" = "latest" ]; then
+  openhv_version=$(git ls-remote --refs --sort="version:refname" --tags https://github.com/OpenHV/OpenHV | tail -n1 | cut -d'/' -f3)
+fi
+
 # Install OpenHV
 mkdir -p /opt/openhv-${openhv_version}
 curl --location "https://github.com/OpenHV/OpenHV/releases/download/${openhv_version}/OpenHV-${openhv_version}-x86_64.AppImage" > /opt/openhv-${openhv_version}/OpenHV-x86_64.AppImage
