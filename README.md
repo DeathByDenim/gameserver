@@ -41,3 +41,7 @@ DOMAINNAME=play.jarno.ca HOSTEDBYNAME=DeathByDenim ./pack_web_offline.sh
 The webpage will display "OFFLINE" and not attempt to show the server stats.
 
 The password for the admin panel as well as for game servers that support admin password is stored in `/etc/gameserverpassword`. The username for the admin panel is just `onfoss`.
+
+## Repository
+
+The main version of this git repository is on [git.libregaming.org](https://git.libregaming.org/DeathByDenim/gameserver). There is a mirror on [Github](https://github.com/DeathByDenim/gameserver)
