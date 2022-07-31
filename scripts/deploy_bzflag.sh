@@ -18,7 +18,7 @@ cd bzflag
 make
 make install
 if ! [ -L /usr/games/bzfs ]; then
-  ln -s /opt/bzflag-2.4/bin/bzfs /usr/games/
+  ln -s /opt/bzflag-${bzflag_version}/bin/bzfs /usr/games/
 fi
 
 rm -rf ${TMPDIR:-/tmp}/bzflag-build

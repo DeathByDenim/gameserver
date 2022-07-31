@@ -5,9 +5,13 @@ if [ -e /etc/systemd/system/mindustry.service ]; then
   systemctl stop mindustry
 fi
 
+if [ -z ${mindustry_version} ] || [ "${mindustry_version}" = "latest" ]; then
+  mindustry_version=$(curl -s https://api.github.com/repos/Anuken/Mindustry/releases?per_page=1 | jq -r '.[0]["tag_name"]' | cut -c2-)
+fi
+
 # Mindustry
-mkdir -p /opt/mindustry-v${mindustry_version}
-curl --location https://github.com/Anuken/Mindustry/releases/download/v${mindustry_version}/server-release.jar > /opt/mindustry-v${mindustry_version}/mindustry.jar
+mkdir -p /opt/mindustry-${mindustry_version}
+curl --location https://github.com/Anuken/Mindustry/releases/download/v${mindustry_version}/server-release.jar > /opt/mindustry-${mindustry_version}/mindustry.jar
 mkdir -p /var/lib/mindustry
 chown -R ${systemuser} /var/lib/mindustry
 
@@ -18,7 +22,7 @@ After=network.target
 
 [Service]
 WorkingDirectory=/var/lib/mindustry
-ExecStart=/usr/bin/console2web -p 62548 /usr/lib/jvm/java-11-openjdk-amd64/bin/java -jar /opt/mindustry-v${mindustry_version}/mindustry.jar "config autosave true","config autosaveSpacing 120","host"
+ExecStart=/usr/bin/console2web -p 62548 /usr/lib/jvm/java-11-openjdk-amd64/bin/java -jar /opt/mindustry-${mindustry_version}/mindustry.jar "config autosave true","config autosaveSpacing 120","host"
 Restart=on-failure
 User=${systemuser}
 

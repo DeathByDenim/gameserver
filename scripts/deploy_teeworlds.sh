@@ -5,6 +5,10 @@ if [ -e /etc/systemd/system/teeworlds.service ]; then
   systemctl stop teeworlds
 fi
 
+if [ -z ${teeworlds_version} ] || [ "${teeworlds_version}" = "latest" ]; then
+  teeworlds_version=$(curl -s https://api.github.com/repos/teeworlds/teeworlds/releases/latest | jq -r '.["tag_name"]')
+fi
+
 # Teeworlds
 teeworld_directory="/opt/teeworlds-${teeworlds_version}"
 mkdir -p ${teeworld_directory}

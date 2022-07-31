@@ -5,6 +5,10 @@ if [ -e /etc/systemd/system/unvanquished.service ]; then
   systemctl stop unvanquished
 fi
 
+if [ -z ${unvanquished_version} ] || [ "${unvanquished_version}" = "latest" ]; then
+  unvanquished_version=$(curl -s https://api.github.com/repos/Unvanquished/Unvanquished/releases/latest | jq -r '.["tag_name"]' | cut -c2-)
+fi
+
 # Unvanquished
 unvanquished_directory="/opt/unvanquished-${unvanquished_version}"
 curl --location "https://github.com/Unvanquished/Unvanquished/releases/download/v${unvanquished_version}/unvanquished_${unvanquished_version}.zip" > ${TMPDIR:-/tmp}/unvanquished.zip

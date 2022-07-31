@@ -5,6 +5,10 @@ if [ -e /etc/systemd/system/lix.service ]; then
   systemctl stop lix
 fi
 
+if [ -z ${lix_version} ] || [ "${lix_version}" = "latest" ]; then
+  lix_version=$(curl -s https://api.github.com/repos/SimonN/LixD/releases/latest | jq -r '.["tag_name"]' | cut -c2-)
+fi
+
 # Install Lix
 mkdir -p ${TMPDIR:-/tmp}/lix-build
 cd ${TMPDIR:-/tmp}/lix-build

@@ -6,7 +6,7 @@ if [ -e /etc/systemd/system/openhv.service ]; then
 fi
 
 if [ -z ${openhv_version} ] || [ "${openhv_version}" = "latest" ]; then
-  openhv_version=$(git ls-remote --refs --sort="version:refname" --tags https://github.com/OpenHV/OpenHV | tail -n1 | cut -d'/' -f3)
+  openhv_version=$(curl -s https://api.github.com/repos/OpenHV/OpenHV/releases/latest | jq -r '.["tag_name"]')
 fi
 
 # Install OpenHV

@@ -18,15 +18,15 @@ if [ -z $HOSTEDBYNAME ]; then
   exit 1
 fi
 
-export stk_version="1.3"
+export stk_version="latest"
 export bzflag_version="2.4"
-export mindustry_version="135"
-export openhv_version="20220221"
-export teeworlds_version="0.7.5"
+export mindustry_version="latest"
+export openhv_version="latest"
+export teeworlds_version="latest"
 export teeworldsddrace_version="16.1"
-export unvanquished_version="0.52.1"
-export xonotic_version="0.8.2"
-export lix_version="0.9.41"
+export unvanquished_version="latest"
+export xonotic_version="0.8.5"
+export lix_version="latest"
 
 export systemuser="onfoss"
 export letsencryptemail="jarno@jarno.ca"
@@ -49,7 +49,7 @@ apt install --assume-yes \
   fuse g++ gcc curl firewalld automake autoconf libtool \
   libcurl3-dev libc-ares-dev zlib1g-dev libncurses-dev make python3-aiohttp \
   nginx-core certbot python3-certbot-nginx sudo python3-psutil \
-  ldc dub libenet-dev python3-bcrypt
+  ldc dub libenet-dev python3-bcrypt jq
 
 # Create the user for running the game servers
 if ! getent passwd ${systemuser}; then
