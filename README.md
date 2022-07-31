@@ -15,7 +15,7 @@ The following games are deployed:
 * Mindustry
 * OpenHV
 * OpenSpades
-* Soldat
+* OpenSoldat
 * SuperTuxKart
 * Super Tux Party
 * Teeworlds (optionally as DDrace)
@@ -28,9 +28,11 @@ It is based on https://git.libregaming.org/c/onFOSS-LAN-Serverconfiguration
 
 The main script is `deploy.sh`. You only need to give if your domain name and your own name.
 ```
-DOMAINNAME=play.jarno.ca  HOSTEDBYNAME=DeathByDenim ./deploy.sh
+DOMAINNAME=play.jarno.ca HOSTEDBYNAME=DeathByDenim ./deploy.sh
 ```
-This will download all the game servers, install them, configure them, and start them up. It also retrieves a certificate for Let's Encrypt for the web interface. If you don't want the certificate, you can also specify `NOSSL=1`.
+This will download all the game servers, install them, configure them, and start them up. It should take less than an hour for all game servers to be up and running.
+
+It also retrieves a certificate for Let's Encrypt for the web interface. If you don't want the certificate, you can also specify `NOSSL=1`.
 
 There is also support for generating just the website without the game server which is useful if you want to host the website somewhere else while your main server is down.
 ```
