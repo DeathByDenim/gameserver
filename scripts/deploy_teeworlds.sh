@@ -22,14 +22,15 @@ sv_timelimit 10
 sv_gametype dm
 sv_motd "HAVE FUN!\nTo change the gamemode you have to reload or change the map to apply the change.\n\n${DOMAINNAME}"
 sv_max_clients 64
-sv_spectator_slots 16
+sv_player_slots 48
 
 sv_register 0
 
-sv_rcon_password onFOSS
+ec_port 8123
+ec_password ${systempassword}
+sv_rcon_password ${systempassword}
 
 sv_vote_kick 1
-sv_vote_map 1
 
 sv_maprotation dm2,dm3,dm6,dm7
 
@@ -56,6 +57,7 @@ cat > /etc/systemd/system/teeworlds.service <<EOF
 Description=Teeworlds server
 After=network.target
 Conflicts=teeworlds-ddrace.service
+Requires=teeworlds-rcon.service
 
 [Service]
 ExecStart=${teeworld_directory}/teeworlds_srv -f /etc/teeworlds.cfg
@@ -66,7 +68,33 @@ User=${systemuser}
 WantedBy=multi-user.target
 EOF
 
+cat > /etc/systemd/system/teeworlds-rcon.service <<EOF
+[Unit]
+Description=Teeworlds server rcon
+After=teeworlds.service
+Requires=teeworlds.service
+Conflicts=teeworlds-ddrace-rcon.service
+
+[Service]
+ExecStart=/usr/bin/console2web -p 62552 -b "${systempassword}" telnet localhost 8123
+Restart=on-failure
+User=${systemuser}
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
 systemctl daemon-reload
 systemctl enable --now teeworlds.service
+
+cat > /etc/nginx/gameserver.d/teeworlds.conf <<EOF
+location /teeworlds {
+    proxy_pass http://localhost:62552/;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade \$http_upgrade;
+    proxy_set_header Connection "Upgrade";
+    proxy_set_header Host \$host;
+}
+EOF
 
 firewall-cmd --zone=public --add-port=8303/udp --permanent

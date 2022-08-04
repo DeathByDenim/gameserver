@@ -112,6 +112,14 @@ function consoles_init() {
   );
   createConsole(
     root,
+    'teeworlds',
+    convertTerminalCodeToHtml,
+    'status',
+    'https://mindustrygame.github.io/wiki/servers/#dedicated-server-commands',
+    "Helpful commands:\n• status\tDisplay server status\n• runwave\tTrigger the next wave\n• kick <name>\tKick a person by name"
+  );
+  createConsole(
+    root,
     'unvanquished',
     convertDaemonedCodeToHtml,
     '/status',
