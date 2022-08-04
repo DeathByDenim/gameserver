@@ -108,15 +108,15 @@ function consoles_init() {
     convertTerminalCodeToHtml,
     'status',
     'https://mindustrygame.github.io/wiki/servers/#dedicated-server-commands',
-    "Helpful commands:\n• status\tDisplay server status\n• runwave\tTrigger the next wave\n• kick <name>\tKick a person by name"
+    "Helpful commands:\n• status\tDisplay server status\n• runwave\tTrigger the next wave\n• kick id\tKick a person with id"
   );
   createConsole(
     root,
     'teeworlds',
     convertTerminalCodeToHtml,
     'status',
-    'https://mindustrygame.github.io/wiki/servers/#dedicated-server-commands',
-    "Helpful commands:\n• status\tDisplay server status\n• runwave\tTrigger the next wave\n• kick <name>\tKick a person by name"
+    'https://www.teeworlds.com/?page=docs&wiki=server_commands',
+    "Helpful commands:\n• status\tDisplay server status\n• change_map mapname\tSwitch to mapname\n• kick <name>\tKick a person by name"
   );
   createConsole(
     root,
