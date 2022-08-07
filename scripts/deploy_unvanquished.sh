@@ -5,13 +5,15 @@ if [ -e /etc/systemd/system/unvanquished.service ]; then
   systemctl stop unvanquished
 fi
 
+unvanquished_url="https://github.com/Unvanquished/Unvanquished/releases/download/v${unvanquished_version}/unvanquished_${unvanquished_version}.zip"
 if [ -z ${unvanquished_version} ] || [ "${unvanquished_version}" = "latest" ]; then
   unvanquished_version=$(curl -s https://api.github.com/repos/Unvanquished/Unvanquished/releases/latest | jq -r '.["tag_name"]' | cut -c2-)
+  unvanquished_url=$(curl -s https://api.github.com/repos/Unvanquished/Unvanquished/releases/latest | jq -r '.assets | .[] |  select(.size > 1000) | .browser_download_url')
 fi
 
 # Unvanquished
 unvanquished_directory="/opt/unvanquished-${unvanquished_version}"
-curl --location "https://github.com/Unvanquished/Unvanquished/releases/download/v${unvanquished_version}/unvanquished_${unvanquished_version}.zip" > ${TMPDIR:-/tmp}/unvanquished.zip
+curl --location ${unvanquished_url} > ${TMPDIR:-/tmp}/unvanquished.zip
 unzip -o -d ${TMPDIR:-/tmp} ${TMPDIR:-/tmp}/unvanquished.zip
 mkdir -p ${unvanquished_directory}/bin ${unvanquished_directory}/share
 unzip -o -d ${unvanquished_directory}/bin ${TMPDIR:-/tmp}/unvanquished*/linux-amd64.zip
