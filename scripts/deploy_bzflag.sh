@@ -13,6 +13,35 @@ if [ -d bzflag ]; then
 fi
 git clone --branch ${bzflag_version} https://github.com/BZFlag-Dev/bzflag.git
 cd bzflag
+# Apply patch to reduce bzadmin CPU usage due to bug
+patch -p1 <<EOF
+diff --git a/src/bzadmin/ServerLink.cxx b/src/bzadmin/ServerLink.cxx
+index 996f57680..4d70c9688 100644
+--- a/src/bzadmin/ServerLink.cxx
++++ b/src/bzadmin/ServerLink.cxx
+@@ -548,7 +548,7 @@ int         ServerLink::read(uint16_t& code, uint16_t& len,
+     // block for specified period.  default is no blocking (polling)
+     struct timeval timeout;
+     timeout.tv_sec = blockTime / 1000;
+-    timeout.tv_usec = blockTime - 1000 * timeout.tv_sec;
++    timeout.tv_usec = 1000 * (blockTime % 1000);
+
+     // only check server
+     fd_set read_set;
+diff --git a/src/bzflag/ServerLink.cxx b/src/bzflag/ServerLink.cxx
+index 7c1c707ed..ce8982afa 100644
+--- a/src/bzflag/ServerLink.cxx
++++ b/src/bzflag/ServerLink.cxx
+@@ -502,7 +502,7 @@ int ServerLink::fillTcpReadBuffer(int blockTime)
+         // block for specified period.  default is no blocking (polling)
+         struct timeval timeout;
+         timeout.tv_sec = blockTime / 1000;
+-        timeout.tv_usec = blockTime - 1000 * timeout.tv_sec;
++        timeout.tv_usec = 1000 * (blockTime % 1000);
+
+         // only check server
+         fd_set read_set;
+EOF
 ./autogen.sh
 ./configure --disable-client --prefix=/opt/bzflag-${bzflag_version}
 make
@@ -28,6 +57,7 @@ cat > /etc/systemd/system/bzflag.service <<EOF
 [Unit]
 Description=BZFlag server
 After=network.target
+Requires=bzflag-monitor.service
 
 [Service]
 ExecStart=/usr/games/bzfs -ms 5 -j -t +r +f SW +f SB{2} +f GM +f ST{3} -d -d -d -passwd "${systempassword}"
@@ -38,8 +68,34 @@ User=${systemuser}
 WantedBy=multi-user.target
 EOF
 
+# Create SystemD unit
+cat > /etc/systemd/system/bzflag-monitor.service <<EOF
+[Unit]
+Description=BZFlag server monitor
+After=bzflag.service
+Requires=bzflag.service
+
+[Service]
+ExecStart=/usr/bin/console2web -p 62553 /usr/games/bzadmin admin@localhost -ui stdboth "/password ${systempassword}"
+Restart=on-failure
+User=${systemuser}
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
 systemctl daemon-reload
 systemctl enable --now bzflag.service
+
+cat > /etc/nginx/gameserver.d/bzflag.conf <<EOF
+location /bzflag {
+    proxy_pass http://localhost:62553/;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade \$http_upgrade;
+    proxy_set_header Connection "Upgrade";
+    proxy_set_header Host \$host;
+}
+EOF
 
 # Add firewall rules
 firewall-cmd --zone=public --add-port=5154/tcp --permanent

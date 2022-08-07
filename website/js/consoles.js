@@ -104,6 +104,14 @@ function consoles_init() {
   );
   createConsole(
     root,
+    'bzflag',
+    convertTerminalCodeToHtml,
+    '/playerlist',
+    'https://wiki.bzflag.org/Slash_Commands',
+    "Helpful commands:\n• /playerlist\tDisplay list of players\n• /kick <name>\tKick the player\n• /gameover\tend the current game"
+  );
+  createConsole(
+    root,
     'mindustry',
     convertTerminalCodeToHtml,
     'status',
