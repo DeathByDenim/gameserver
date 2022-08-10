@@ -13,35 +13,6 @@ if [ -d bzflag ]; then
 fi
 git clone --branch ${bzflag_version} https://github.com/BZFlag-Dev/bzflag.git
 cd bzflag
-# Apply patch to reduce bzadmin CPU usage due to bug
-patch -p1 <<EOF
-diff --git a/src/bzadmin/ServerLink.cxx b/src/bzadmin/ServerLink.cxx
-index 996f57680..4d70c9688 100644
---- a/src/bzadmin/ServerLink.cxx
-+++ b/src/bzadmin/ServerLink.cxx
-@@ -548,7 +548,7 @@ int         ServerLink::read(uint16_t& code, uint16_t& len,
-     // block for specified period.  default is no blocking (polling)
-     struct timeval timeout;
-     timeout.tv_sec = blockTime / 1000;
--    timeout.tv_usec = blockTime - 1000 * timeout.tv_sec;
-+    timeout.tv_usec = 1000 * (blockTime % 1000);
-
-     // only check server
-     fd_set read_set;
-diff --git a/src/bzflag/ServerLink.cxx b/src/bzflag/ServerLink.cxx
-index 7c1c707ed..ce8982afa 100644
---- a/src/bzflag/ServerLink.cxx
-+++ b/src/bzflag/ServerLink.cxx
-@@ -502,7 +502,7 @@ int ServerLink::fillTcpReadBuffer(int blockTime)
-         // block for specified period.  default is no blocking (polling)
-         struct timeval timeout;
-         timeout.tv_sec = blockTime / 1000;
--        timeout.tv_usec = blockTime - 1000 * timeout.tv_sec;
-+        timeout.tv_usec = 1000 * (blockTime % 1000);
-
-         // only check server
-         fd_set read_set;
-EOF
 ./autogen.sh
 ./configure --disable-client --prefix=/opt/bzflag-${bzflag_version}
 make
