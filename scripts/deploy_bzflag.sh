@@ -20,6 +20,9 @@ make install
 if ! [ -L /usr/games/bzfs ]; then
   ln -s /opt/bzflag-${bzflag_version}/bin/bzfs /usr/games/
 fi
+if ! [ -L /usr/games/bzadmin ]; then
+  ln -s /opt/bzflag-${bzflag_version}/bin/bzadmin /usr/games/
+fi
 
 rm -rf ${TMPDIR:-/tmp}/bzflag-build
 
