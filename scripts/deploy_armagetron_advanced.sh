@@ -12,7 +12,7 @@ mkdir -p /etc/systemd/system/armagetronad-dedicated.service.d
 cat > /etc/systemd/system/armagetronad-dedicated.service.d/override.conf <<EOF
 [Service]
 ExecStart=
-ExecStart=/usr/bin/console2web -p 62551 /usr/games/armagetronad-dedicated.real --datadir /usr/share/games/armagetronad --configdir /etc/armagetronad --userdatadir /var/games/armagetronad
+ExecStart=/usr/bin/console2web -a "${systempassword}" -p 62551 /usr/games/armagetronad-dedicated.real --datadir /usr/share/games/armagetronad --configdir /etc/armagetronad --userdatadir /var/games/armagetronad
 EOF
 systemctl daemon-reload
 

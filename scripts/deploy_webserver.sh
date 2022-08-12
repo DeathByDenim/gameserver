@@ -32,6 +32,7 @@ if [ x"$NOSSL" != "x" ] && [ $NOSSL -eq 1 ]; then
     sed -i $file -e s/"https:"/"http:"/g
   done
 fi
+sed -i /var/www/html/js/consoles.js -e s/"MD5GAMEPASSWORD"/"$(echo -n "${systempassword}" | md5sum | cut -d' ' -f1)"/g
 
 # Patch the NGINX configuration for the web sockets
 cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak

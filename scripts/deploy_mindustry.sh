@@ -22,7 +22,7 @@ After=network.target
 
 [Service]
 WorkingDirectory=/var/lib/mindustry
-ExecStart=/usr/bin/console2web -p 62548 /usr/lib/jvm/java-11-openjdk-amd64/bin/java -jar /opt/mindustry-${mindustry_version}/mindustry.jar "config autosave true","config autosaveSpacing 120","host"
+ExecStart=/usr/bin/console2web -a "${systempassword}" -p 62548 /usr/lib/jvm/java-11-openjdk-amd64/bin/java -jar /opt/mindustry-${mindustry_version}/mindustry.jar "config autosave true","config autosaveSpacing 120","host"
 Restart=on-failure
 User=${systemuser}
 

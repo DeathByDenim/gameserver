@@ -93,6 +93,7 @@ function createConsole(root, game_name, text_colour_function, initial_command, h
 }
 
 function consoles_init() {
+  document.cookie = 'token=MD5GAMEPASSWORD; SameSite=Strict';
   const root = document.getElementById('console-div');
   createConsole(
     root,

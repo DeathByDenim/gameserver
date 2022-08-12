@@ -46,7 +46,7 @@ Description=Unvanquished server
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/console2web -p 62549 ${unvanquished_directory}/bin/daemonded -pakpath ${unvanquished_directory}/share/pkg/ -libpath ${unvanquished_directory}/bin/ -homepath \${HOME}/unvanquished_home/ +exec unvanquished.cfg
+ExecStart=/usr/bin/console2web -a "${systempassword}" -p 62549 ${unvanquished_directory}/bin/daemonded -pakpath ${unvanquished_directory}/share/pkg/ -libpath ${unvanquished_directory}/bin/ -homepath \${HOME}/unvanquished_home/ +exec unvanquished.cfg
 Restart=on-failure
 User=${systemuser}
 

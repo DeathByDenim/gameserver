@@ -48,7 +48,7 @@ Conflicts=xonotic.service
 
 [Service]
 WorkingDirectory=${xonotic_directory}
-ExecStart=/usr/bin/console2web -p 62550 ${xonotic_directory}/all run dedicated +serverconfig server.cfg -userdir ${systemuserhome}/xonotic-br
+ExecStart=/usr/bin/console2web -a "${systempassword}" -p 62550 ${xonotic_directory}/all run dedicated +serverconfig server.cfg -userdir ${systemuserhome}/xonotic-br
 Restart=on-failure
 User=${systemuser}
 

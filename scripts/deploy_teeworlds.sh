@@ -76,7 +76,7 @@ Requires=teeworlds.service
 Conflicts=teeworlds-ddrace-rcon.service
 
 [Service]
-ExecStart=/usr/bin/console2web -p 62552 -b "${systempassword}" telnet localhost 8123
+ExecStart=/usr/bin/console2web -a "${systempassword}" -p 62552 -b "${systempassword}" telnet localhost 8123
 Restart=on-failure
 User=${systemuser}
 

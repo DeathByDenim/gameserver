@@ -50,7 +50,7 @@ After=bzflag.service
 Requires=bzflag.service
 
 [Service]
-ExecStart=/usr/bin/console2web -p 62553 /usr/games/bzadmin admin@localhost -ui stdboth "/password ${systempassword}"
+ExecStart=/usr/bin/console2web -a "${systempassword}" -p 62553 /usr/games/bzadmin admin@localhost -ui stdboth "/password ${systempassword}"
 Restart=on-failure
 User=${systemuser}
 
