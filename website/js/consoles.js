@@ -121,6 +121,14 @@ function consoles_init() {
   );
   createConsole(
     root,
+    'opensoldat',
+    convertTerminalCodeToHtml,
+    '',
+    'https://static.soldat.pl/man/manual-en.html#KOMENDY',
+    "Helpful commands:\n• /nextmap\tSwitch to next map\n• kick /<name>\tKick a person"
+  );
+  createConsole(
+    root,
     'teeworlds',
     convertTerminalCodeToHtml,
     'status',

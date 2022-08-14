@@ -19,7 +19,7 @@ git clone https://github.com/opensoldat/opensoldat.git
 git clone https://github.com/opensoldat/base.git
 cd opensoldat
 mkdir build && cd build
-cmake -DCMAKE_INSTALL_PREFIX=/opt/opensoldat ..
+cmake -DCMAKE_INSTALL_PREFIX=/opt/opensoldat -DBUILD_CLIENT=False ..
 make
 make install
 mkdir -p /opt/opensoldat/bin/configs
@@ -172,6 +172,7 @@ cat > /etc/systemd/system/opensoldat.service <<EOF
 [Unit]
 Description=Soldat server
 After=network.target
+Requires=opensoldat-monitor.service
 
 [Service]
 ExecStart=/usr/games/opensoldatserver -sv_adminpassword "${systempassword}"
@@ -182,8 +183,33 @@ User=${systemuser}
 WantedBy=multi-user.target
 EOF
 
+cat > /etc/systemd/system/opensoldat-monitor.service <<EOF
+[Unit]
+Description=Soldat server monitor
+After=network.target,opensoldat.service
+Requires=opensoldat.service
+
+[Service]
+ExecStart=/usr/bin/console2web -a "${systempassword}" -p 62554 -b "${systempassword}" telnet localhost 23073
+Restart=on-failure
+User=${systemuser}
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
 systemctl daemon-reload
 systemctl enable --now opensoldat.service
+
+cat > /etc/nginx/gameserver.d/opensoldat.conf <<EOF
+location /opensoldat {
+    proxy_pass http://localhost:62554/;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade \$http_upgrade;
+    proxy_set_header Connection "Upgrade";
+    proxy_set_header Host \$host;
+}
+EOF
 
 # Add firewall rules
 firewall-cmd --zone=public --add-port=23073/udp --permanent
