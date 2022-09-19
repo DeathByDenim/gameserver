@@ -23,8 +23,22 @@ fi
 
 apt install --assume-yes ufoai-server
 
-echo "set rcon_password ${systempassword}" >> /etc/ufoai-server/server.cfg
-sed -i -e 's/set sv_hostname.*/set sv_hostname "onFOSS-LAN"/' /etc/ufoai-server/server.cfg
+# Bug fix for UFO:AI? WorkingDirectory needs to be set for server
+# to be able to read debian_server.cfg
+cat > /etc/systemd/system/ufoai-server.service.d/override.conf <<EOF
+[Service]
+WorkingDirectory=/usr/lib/ufoai-server
+EOF
+systemctl daemon-reload
+
+cat > /etc/ufoai-server/server.cfg <<EOF
+set sv_hostname "onFOSS-LAN"
+set sv_maxclients 8
+set sv_public 0
+set sv_gametype "coop4"
+set rcon_password "${systempassword}"
+mapcyclenext
+EOF
 
 systemctl restart ufoai-server.service
 
