@@ -36,9 +36,8 @@ cat > /etc/ufoai-server/server.cfg <<EOF
 set sv_hostname "onFOSS-LAN"
 set sv_maxclients 8
 set sv_public 0
-set sv_gametype "coop4"
 set rcon_password "${systempassword}"
-mapcyclenext
+set sv_gametype "coop4"
 EOF
 
 systemctl restart ufoai-server.service
