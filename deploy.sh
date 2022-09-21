@@ -43,6 +43,7 @@ export teeworldsddrace_version="16.1"
 export unvanquished_version="latest"
 export xonotic_version="0.8.5"
 export lix_version="latest"
+export shatteredparadise_version="latest"
 
 export systemuser="onfoss"
 export letsencryptemail="jarno@jarno.ca"
@@ -104,6 +105,7 @@ cp console2web/console2web.py /usr/bin/console2web
 "$(dirname "$0")"/scripts/deploy_opensoldat.sh
 "$(dirname "$0")"/scripts/deploy_supertuxparty.sh
 "$(dirname "$0")"/scripts/deploy_ufoai.sh
+"$(dirname "$0")"/scripts/deploy_shatteredparadise.sh
 
 # Apply all pending firewall rules. NGINX shouldn't have to be restarted, but it seems to help.
 firewall-cmd --reload
