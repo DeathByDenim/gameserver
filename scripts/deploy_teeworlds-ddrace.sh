@@ -24,9 +24,35 @@ fi
 # Teeworlds
 teeworldsddrace_directory="/opt/teeworlds-ddrace-${teeworldsddrace_version}"
 mkdir -p "${teeworldsddrace_directory}"
-curl --location "https://ddnet.tw/downloads/DDNet-${teeworldsddrace_version}-linux_x86_64.tar.xz" | tar --extract --xz --no-same-owner --strip-components=1 --directory="${teeworldsddrace_directory}"
-curl --location "https://maps.ddnet.tw/compilations/novice.zip" > ${TMPDIR:/tmp}/novice.zip
-unzip -o -d "${teeworldsddrace_directory}"/data/maps ${TMPDIR:/tmp}/novice.zip
+
+# Download is unreliable at times. Retry a few times before failing
+retry_count=3
+while [ $retry_count -gt 0 ]; do
+  curl --location "https://ddnet.tw/downloads/DDNet-${teeworldsddrace_version}-linux_x86_64.tar.xz" | tar --extract --xz --no-same-owner --strip-components=1 --directory="${teeworldsddrace_directory}"
+  if [ $? -eq 0 ]; then
+    break
+  fi
+  sleep 20
+  (( retry_count-- ))
+done
+if [ $retry_count -le 0 ]; then
+  exit 1
+fi
+
+retry_count=3
+while [ $retry_count -gt 0 ]; do
+  curl --location "https://maps.ddnet.tw/compilations/novice.zip" > ${TMPDIR:-/tmp}/novice.zip
+  if [ $? -eq 0 ]; then 
+    break
+  fi
+  sleep 20
+  (( retry_count-- ))
+done
+if [ $retry_count -le 0 ]; then
+  exit 1
+fi
+
+unzip -o -d "${teeworldsddrace_directory}"/data/maps ${TMPDIR:-/tmp}/novice.zip
 for f in "${teeworldsddrace_directory}"/data/maps/novice/maps/*.map; do
   "${teeworldsddrace_directory}"/map_convert_07 "$f" "`echo "$f" | sed s/"maps\/novice\/maps"/"maps7"/g`"
   cp "$f" "${teeworldsddrace_directory}"/data/maps
