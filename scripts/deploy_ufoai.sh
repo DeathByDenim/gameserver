@@ -25,6 +25,7 @@ apt install --assume-yes ufoai-server
 
 # Bug fix for UFO:AI? WorkingDirectory needs to be set for server
 # to be able to read debian_server.cfg
+mkdir -p /etc/systemd/system/ufoai-server.service.d
 cat > /etc/systemd/system/ufoai-server.service.d/override.conf <<EOF
 [Service]
 WorkingDirectory=/usr/lib/ufoai-server
