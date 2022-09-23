@@ -28,7 +28,7 @@ fi
 cat > /etc/systemd/system/hedgewars.service <<EOF
 [Unit]
 Description=Hedgewars server
-After=network.target
+After=network-online.target
 
 [Service]
 ExecStart=/usr/lib/hedgewars/bin/hedgewars-server
