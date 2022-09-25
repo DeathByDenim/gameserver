@@ -38,7 +38,7 @@ mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=/opt/opensoldat -DBUILD_CLIENT=False ..
 make
 make install
-mkdir -p /opt/opensoldat/bin/configs
+mkdir -p /opt/opensoldat/bin/configs /opt/opensoldat/bin/logs
 cp -r ${builddir}/base/server/configs/bots /opt/opensoldat/bin/configs/bots
 
 if ! [ -L /usr/games/opensoldatserver ]; then
@@ -181,7 +181,7 @@ inf_Warehouse
 inf_Warlock
 EOF
 
-chown -R ${systemuser}: /opt/opensoldat/bin/configs
+chown -R ${systemuser}: /opt/opensoldat/bin/configs /opt/opensoldat/bin/logs
 
 # Create SystemD unit
 cat > /etc/systemd/system/opensoldat.service <<EOF
@@ -206,6 +206,7 @@ After=network.target,opensoldat.service
 Requires=opensoldat.service
 
 [Service]
+ExecStartPre=/bin/sh -c 'sleep 10'
 ExecStart=/usr/bin/console2web -a "${systempassword}" -p 62554 -b "${systempassword}" telnet localhost 23073
 Restart=on-failure
 User=${systemuser}
@@ -215,7 +216,7 @@ WantedBy=multi-user.target
 EOF
 
 systemctl daemon-reload
-systemctl enable --now opensoldat.service
+systemctl enable --now opensoldat.service opensoldat-monitor.service
 
 cat > /etc/nginx/gameserver.d/opensoldat.conf <<EOF
 location /opensoldat {
