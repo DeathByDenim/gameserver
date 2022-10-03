@@ -188,7 +188,6 @@ cat > /etc/systemd/system/opensoldat.service <<EOF
 [Unit]
 Description=Soldat server
 After=network.target
-Requires=opensoldat-monitor.service
 
 [Service]
 ExecStart=/usr/games/opensoldatserver -sv_adminpassword "${systempassword}"
