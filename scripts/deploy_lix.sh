@@ -35,7 +35,7 @@ git clone --branch v${lix_version} https://github.com/SimonN/LixD.git
 cd LixD/src/server
 dub build
 mkdir -p /opt/lix-${lix_version}
-cp ../../bin/server /opt/lix-${lix_version}
+cp ../../bin/lixserv /opt/lix-${lix_version}
 rm -rf ${TMPDIR:-/tmp}/lix-build
 
 # Create SystemD unit
@@ -45,7 +45,7 @@ Description=Lix server
 After=network.target
 
 [Service]
-ExecStart=/opt/lix-${lix_version}/server
+ExecStart=/opt/lix-${lix_version}/lixserv
 Restart=on-failure
 User=${systemuser}
 
