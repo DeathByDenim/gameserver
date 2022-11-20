@@ -30,7 +30,7 @@ fi
 # Install SuperTuxKart
 stk_dir="/opt/SuperTuxKart-${stk_version}"
 mkdir -p ${stk_dir}
-curl --location "https://github.com/supertuxkart/stk-code/releases/download/${stk_version}/SuperTuxKart-${stk_version}-linux-64bit.tar.xz" | tar --extract --xz --no-same-owner --strip-components=1 --directory=${stk_dir}
+curl --location "https://github.com/supertuxkart/stk-code/releases/download/${stk_version}/SuperTuxKart-${stk_version}-linux-x86_64.tar.xz" | tar --extract --xz --no-same-owner --strip-components=1 --directory=${stk_dir}
 ln -s ${stk_dir}/bin/supertuxkart /usr/games/supertuxkart
 
 # Configuration
