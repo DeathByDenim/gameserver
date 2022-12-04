@@ -37,6 +37,7 @@ fi
 export stk_version="latest"
 export bzflag_version="2.4"
 export mindustry_version="latest"
+export odamex_version="10.2.0"
 export openhv_version="latest"
 export teeworlds_version="latest"
 export teeworldsddrace_version="16.1"
@@ -94,6 +95,7 @@ cp console2web/console2web.py /usr/bin/console2web
 "$(dirname "$0")"/scripts/deploy_hedgewars.sh
 "$(dirname "$0")"/scripts/deploy_lix.sh
 "$(dirname "$0")"/scripts/deploy_mindustry.sh
+"$(dirname "$0")"/scripts/deploy_odamex.sh
 "$(dirname "$0")"/scripts/deploy_openhv.sh
 "$(dirname "$0")"/scripts/deploy_openspades.sh
 "$(dirname "$0")"/scripts/deploy_teeworlds.sh
