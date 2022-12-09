@@ -52,9 +52,9 @@ sv_maprotation dm2,dm3,dm6,dm7
 
 add_vote "Restart Round" "restart"
 add_vote "Reload Map" "reload"
-add_vote "Change Gamemode to DM" "exec dm.cfg"
-add_vote "Change Gamemode to CTF" "exec ctf.cfg"
-add_vote "Change Gamemode to TDM" "exec tdm.cfg"
+add_vote "Change Gamemode to DM" "exec /etc/teedm.cfg"
+add_vote "Change Gamemode to CTF" "exec /etc/teectf.cfg"
+add_vote "Change Gamemode to TDM" "exec /etc/teetdm.cfg"
 add_vote "Change Map to ctf1" "change_map ctf1"
 add_vote "Change Map to ctf2" "change_map ctf2"
 add_vote "Change Map to ctf3" "change_map ctf3"
@@ -66,6 +66,27 @@ add_vote "Change Map to dm6" "change_map dm6"
 add_vote "Change Map to dm7" "change_map dm7"
 add_vote "Change Map to dm8" "change_map dm8"
 add_vote "Change Map to dm9" "change_map dm9"
+EOF
+
+cat > /etc/teedm.cfg <<EOF
+sv_maprotation dm2,dm3,dm6,dm7
+sv_map dm3
+sv_scorelimit 20
+sv_gametype dm
+EOF
+
+cat > /etc/teetdm.cfg <<EOF
+sv_maprotation dm2,dm3,dm6,dm7
+sv_map dm3
+sv_scorelimit 20
+sv_gametype dm
+EOF
+
+cat > /etc/teectf.cfg <<EOF
+sv_maprotation ctf2,ctf3,ctf4
+sv_map ctf2
+sv_scorelimit 400
+sv_gametype ctf
 EOF
 
 cat > /etc/systemd/system/teeworlds.service <<EOF
