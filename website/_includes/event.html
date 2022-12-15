@@ -1,0 +1,29 @@
+          <h4>{{ event.date | date: "%A %d %B %Y, %H:%M %Z" }}</h4>
+          <script>
+            var event_year = {{ event.date | date: "%Y" }};
+            var event_month = {{ event.date | date: "%M" }};
+            var event_day = {{ event.date | date: "%M" }};
+            var d = new Date(Date.UTC(event_year, event_month, event_day, {{ event.date | date: "%H" }}, {{ event.date | date: "%M" }}));
+            document.writeln("<p>(Local time: "+d.toTimeString()+")</p>")
+          </script>
+          {% if event.intro %}
+          <p>{{ event.intro }}</p>
+          {% endif %}
+          <ul>
+            {% for game in event.games %}
+            {% assign time = game.time | split: ":"%}
+            {% if game.time %}
+            <li>{{ game.time }}UTC {{ game.title }}<script>d=new Date(Date.UTC(event_year, event_month, event_day, {{ time | slice: 0 }}, {{ time | slice: 1 }}));document.writeln(" ("+ Intl.DateTimeFormat(undefined, {hour: '2-digit', minute: '2-digit', timeZoneName: 'short'}).format(d) + ")")</script></li>
+            {% else %}
+            <li>{{ game.title }}</li>
+            {% endif %}
+            {% if game.extras %}
+              <ul>
+              {% for extra in game.extras %}
+                <li>{{ extra }}</li>
+              {% endfor %}
+              </ul>
+            {% endif %}
+            {% endfor %}
+          </ul>
+          {{ event.content }}

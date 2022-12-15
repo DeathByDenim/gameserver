@@ -1,0 +1,27 @@
+    <nav class="container">
+      <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+          <img class="bi me-2" width="40" height="32" src="assets/img/blackmage.svg" alt="Site icon">
+          <span class="fs-4">onFOSS-LAN hosted by {{ site.content.hosted_by_name }}</span>
+        </a>
+
+        <ul class="nav nav-pills">
+          {% if layout.nav_pill %}
+            {% assign nav_pill = layout.nav_pill %}
+          {% else %}
+            {% assign nav_pill = page.nav_pill %}
+          {% endif %}
+          {% case nav_pill %}
+            {% when "tournament", "schedule", "help", "admin" %}
+              {% assign home = false %}
+            {% else %}
+              {% assign home = true %}
+          {% endcase %}
+          <li class="nav-item"><a href="index.html" class="nav-link {% if home %}active{% endif %}" aria-current="page">Home</a></li>
+          <li class="nav-item"><a href="tournament.html" class="nav-link {% if nav_pill == "tournament" %}active{% endif %}">Tournament</a></li>
+          <li class="nav-item"><a href="schedule.html" class="nav-link {% if nav_pill == "schedule" %}active{% endif %}">Schedule</a></li>
+          <li class="nav-item"><a href="help.html" class="nav-link {% if nav_pill == "help" %}active{% endif %}">Help</a></li>
+          <li class="nav-item"><a href="admin.html" class="nav-link {% if nav_pill == "admin" %}active{% endif %}">Admin</a></li>
+        </ul>
+      </header>
+    </nav>

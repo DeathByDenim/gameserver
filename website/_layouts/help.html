@@ -1,0 +1,13 @@
+---
+layout: default
+nav_pill: help
+---
+          <link rel="stylesheet" href="assets/css/help.css">
+          {% assign game = site.data.games | where_exp: "item", "item.name == page.game" | first %}
+          <h1>{{ game.title }}</h1>
+          <p>{{ game.description }}</p>
+          <img src="assets/img/{{ game.name }}.png" alt="Screenshot of {{ game.title }}">
+          <h2>Getting the game</h2>
+          <div class="download"><a href="{{ game.download_link }}">DOWNLOAD</a></div>
+          {{ content }}
+          <p></p>

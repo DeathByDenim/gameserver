@@ -1,3 +1,5 @@
+---
+---
 // Collection of scripts to deploy a server hosting several open-source games
 // Copyright (C) 2022  Jarno van der Kolk
 //
@@ -14,7 +16,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-function createConsole(root, game_name, text_colour_function, initial_command, help_url, tooltip) {
+function createConsole(root, game_name, game_title, text_colour_function, initial_command, help_url, tooltip) {
   const div_card = document.createElement('div');
   const div_card_header = document.createElement('div');
   const h5 = document.createElement('h5');
@@ -33,7 +35,7 @@ function createConsole(root, game_name, text_colour_function, initial_command, h
   div_card_header.className = "card-header";
   h5.className = "mb-0";
   card_button.className = "btn btn-link";
-  card_button.innerText = game_name[0].toUpperCase() + game_name.substr(1);
+  card_button.innerText = game_title;
   div_collapse.className = "collapse";
   div_card_body.className = "card-body";
 
@@ -88,7 +90,7 @@ function createConsole(root, game_name, text_colour_function, initial_command, h
   });
 
   // Create WebSocket connection.
-  const socket = new WebSocket("wss://DOMAINNAME/" + game_name)
+  const socket = new WebSocket("ws{% if site.content.ssl %}s{% endif %}://{{ site.content.domain_name }}/" + game_name)
 
   // Connection opened
   socket.addEventListener('open', function (event) {
@@ -109,64 +111,20 @@ function createConsole(root, game_name, text_colour_function, initial_command, h
 }
 
 function consoles_init() {
-  document.cookie = 'token=MD5GAMEPASSWORD; SameSite=Strict';
+  document.cookie = 'token={{ site.content.md5password }}; SameSite=Strict';
   const root = document.getElementById('console-div');
+  {% assign games_with_consoles = site.data.games | where_exp: "item", "item.has_console" | sort: "name" %}
+  {% for game in games_with_consoles %}
   createConsole(
     root,
-    'armagetronad',
-    convertTerminalCodeToHtml,
-    'players',
-    'http://wiki.armagetronad.org/index.php?title=Console_Commands',
-    "Helpful commands:\n• players\tShow current players\n• kick <name>\tKick the player\n• num_ais <num>\tSet the number of AIs for games with more than one player.\n• limit_rounds\tEnd the match after this number of rounds"
+    '{{ game.name }}',
+    '{{ game.title }}',
+    convert{{ game.console_output_coloring }}CodeToHtml,
+    '{{ game.console_initial_command }}',
+    '{{ game.console_help_link }}',
+    "Helpful commands:\n{% for command in game.console_example_commands %}• {{ command[0] }}\t{{ command[1] }}\n{% endfor %}"
   );
-  createConsole(
-    root,
-    'bzflag',
-    convertTerminalCodeToHtml,
-    '/playerlist',
-    'https://wiki.bzflag.org/Slash_Commands',
-    "Helpful commands:\n• /playerlist\tDisplay list of players\n• /kick <name>\tKick the player\n• /gameover\tend the current game"
-  );
-  createConsole(
-    root,
-    'mindustry',
-    convertTerminalCodeToHtml,
-    'status',
-    'https://mindustrygame.github.io/wiki/servers/#dedicated-server-commands',
-    "Helpful commands:\n• status\tDisplay server status\n• runwave\tTrigger the next wave\n• kick <name>\tKick a person by name"
-  );
-  createConsole(
-    root,
-    'opensoldat',
-    convertTerminalCodeToHtml,
-    '',
-    'https://static.soldat.pl/man/manual-en.html#KOMENDY',
-    "Helpful commands:\n• /nextmap\tSwitch to next map\n• kick /<name>\tKick a person"
-  );
-  createConsole(
-    root,
-    'teeworlds',
-    convertTerminalCodeToHtml,
-    'status',
-    'https://www.teeworlds.com/?page=docs&wiki=server_commands',
-    "Helpful commands:\n• status\tDisplay server status\n• change_map <mapname>\tSwitch to <mapname>\n• kick <id>\tKick a person by id"
-  );
-  createConsole(
-    root,
-    'unvanquished',
-    convertDaemonedCodeToHtml,
-    '/status',
-    'https://wiki.unvanquished.net/wiki/Server/Running#Commands',
-    "Helpful commands:\n• /listplayers\tList current players in-game\n• /kick <name>\tKick the player\n• /nextmap\tGo to the next map in the rotation"
-  );
-  createConsole(
-    root,
-    'xonotic',
-    convertTerminalCodeToHtml,
-    'who',
-    'https://gitlab.com/xonotic/xonotic/-/wikis/Basic-server-configuration',
-    "Helpful commands:\n• who\tList current players in-game\n• kick <name>\tKick the player\n• gotomap <name>\tGo to the specified map"
-  );
+  {% endfor %}
 
   collapse_init();
 }

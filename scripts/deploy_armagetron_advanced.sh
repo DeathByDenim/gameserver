@@ -43,8 +43,8 @@ EOF
 
 systemctl restart armagetronad-dedicated.service
 
-cat > /etc/nginx/gameserver.d/armagetronad.conf <<EOF
-location /armagetronad {
+cat > /etc/nginx/gameserver.d/armagetron.conf <<EOF
+location /armagetron {
     proxy_pass http://localhost:62551/;
     proxy_http_version 1.1;
     proxy_set_header Upgrade \$http_upgrade;

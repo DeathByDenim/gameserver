@@ -26,28 +26,29 @@ firewall-cmd --reload
 
 # Request SSL certificate. This assumes DNS has been set up already
 if [ x"$NOSSL" = "x" ] || [ $NOSSL -ne 1 ]; then
+  ssl="true"
   certbot -n --nginx -d ${DOMAINNAME} -d www.${DOMAINNAME} --agree-tos -m "${letsencryptemail}"
+else
+  ssl="false"
 fi
 
-# Put the website files in place
-cp -r "$(dirname "$0")"/../website/[^_]* /var/www/html
-for file in /var/www/html/*\.html /var/www/html/js/*\.js; do
-  sed -i $file -e s/"DOMAINNAME"/"${DOMAINNAME}"/g
-done
-for file in /var/www/html/*\.html; do
-  sed -i $file -e s/"HOSTEDBYNAME"/"${HOSTEDBYNAME}"/g
-done
-for file in /var/www/html/*\.html; do
-  sed -i $file -e "/SERVERSTATE/r $(dirname "$0")/../website/_state/online.html"
-  sed -i $file -e "/SERVERSTATE/d"
-done
-if [ x"$NOSSL" != "x" ] && [ $NOSSL -eq 1 ]; then
-  for file in /var/www/html/js/*\.js; do
-    sed -i $file -e s/"wss:"/"ws:"/g
-    sed -i $file -e s/"https:"/"http:"/g
-  done
+# Generate the website and put in place
+curl --location https://github.com/twbs/bootstrap/archive/v5.2.3.zip > ${TMPDIR:-/tmp}/bootstrap.zip
+unzip -o -d ${TMPDIR:-/tmp}/bootstrap ${TMPDIR:-/tmp}/bootstrap.zip "bootstrap-5.2.3/scss/*"
+if [ -d "$(dirname "$0")"/../website/_sass/bootstrap ]; then
+  rm -r "$(dirname "$0")"/../website/_sass/bootstrap
 fi
-sed -i /var/www/html/js/consoles.js -e s/"MD5GAMEPASSWORD"/"$(echo -n "${systempassword}" | md5sum | cut -d' ' -f1)"/g
+mv ${TMPDIR:-/tmp}/bootstrap/bootstrap-5.2.3/scss "$(dirname "$0")"/../website/_sass/bootstrap
+rm -r ${TMPDIR:-/tmp}/bootstrap.zip ${TMPDIR:-/tmp}/bootstrap
+cat > "$(dirname "$0")"/../website/_config.yml <<EOF
+content:
+  hosted_by_name: "${HOSTEDBYNAME}"
+  domain_name: "${DOMAINNAME}"
+  offline: false
+  ssl: ${ssl}
+  md5password: "$(echo -n "${systempassword}" | md5sum | cut -d' ' -f1)"
+EOF
+jekyll build --source "$(dirname "$0")"/../website --destination /var/www/html
 
 # Patch the NGINX configuration for the web sockets
 cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak

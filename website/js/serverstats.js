@@ -1,3 +1,5 @@
+---
+---
 // Collection of scripts to deploy a server hosting several open-source games
 // Copyright (C) 2022  Jarno van der Kolk
 //
@@ -12,7 +14,7 @@
 // GNU Affero General Public License for more details.
 //
 // You should have received a copy of the GNU Affero General Public License
-// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 let heightScale = d3.scaleLinear()
   .domain([0,100])
@@ -51,7 +53,7 @@ function updateGraph(data, svgid, property_class, property) {
 }
 
 function update() {
-  d3.json('https://DOMAINNAME/monitoring/all').then(function(data){
+  d3.json('http{% if site.content.ssl %}s{% endif %}://{{ site.content.domain_name }}/monitoring/all').then(function(data){
     updateGraph(data, '#memgraph', 'mem', 'm');
     updateGraph(data, '#cpugraph', 'cpu', 'c');
   });

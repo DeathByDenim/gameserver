@@ -1,35 +1,7 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Game server</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/serverstats.css">
-    <link rel="icon" href="icon.svg" sizes="any" type="image/svg+xml">
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="js/serverstats.js"></script>
-  </head>
-  <body>
-    <nav class="container">
-      <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-          <img class="bi me-2" width="40" height="32" src="img/blackmage.svg" alt="Site icon">
-          <span class="fs-4">onFOSS-LAN hosted by HOSTEDBYNAME</span>
-        </a>
-
-        <ul class="nav nav-pills">
-          <li class="nav-item"><a href="index.html" class="nav-link" aria-current="page">Home</a></li>
-          <li class="nav-item"><a href="tournament.html" class="nav-link">Tournament</a></li>
-          <li class="nav-item"><a href="schedule.html" class="nav-link">Schedule</a></li>
-          <li class="nav-item"><a href="help.html" class="nav-link active">Help</a></li>
-          <li class="nav-item"><a href="admin.html" class="nav-link">Admin</a></li>
-        </ul>
-      </header>
-    </nav>
-
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8">
+---
+layout: default
+nav_pill: help
+---
           <h1>Help</h1>
           <h3>Communication</h3>
           <h4>How to use Mumble</h4>
@@ -48,7 +20,7 @@
             using the mumble link from the <a href="index.html">Home</a> page.
             You should be able to connect and see something like this:
           </p>
-          <img src="img/mumble_interface.png" alt="Screenshot of the Mumble interface">
+          <img src="assets/img/mumble_interface.png" alt="Screenshot of the Mumble interface">
           <p>
             By default, you will be place in the Root, but you can double-click
             on any channel to join. You will most likely want to go to the Lobby,
@@ -72,7 +44,7 @@
             Element before, click on the Continue button for that. You should
             be able to connect and see something like this:
           </p>
-          <img src="img/element_interface.png" alt="Screenshot of the Element interface">
+          <img src="assets/img/element_interface.png" alt="Screenshot of the Element interface">
           <p>There are usually people here, even outside of the event.</p>
           <h4>How to use XMPP/Movim</h4>
           <p>
@@ -91,7 +63,7 @@
             From there, you can start the web-based client at <a href="https://mov.im">mov.im</a>.
             After logging in, choose &quot;chats&quot; and then click on the big plus symbol.
           </p>
-          <img src="img/movim_interface.png" alt="Screenshot of the Mov.im interface">
+          <img src="assets/img/movim_interface.png" alt="Screenshot of the Mov.im interface">
           <p>
             In the new screen that pops up, you will find &quot;Join a chatroom&quot;
             and then &quot;Join a custom chatroom&quot;. Paste the room name from
@@ -99,35 +71,13 @@
             you want in the Name field. That's only visible for you as the name
             of this room.
           </p>
-          <img src="img/movim_interface2.png" alt="Screenshot of the Mov.im interface">
+          <img src="assets/img/movim_interface2.png" alt="Screenshot of the Mov.im interface">
           <p>There are usually people here, even outside of the event.</p>
           <h3>Games</h3>
           <p>Each game has their own separate help page</p>
           <ul>
-            <li><a href="help_armagetron.html">Armagetron Advanced</a></li>
-            <li><a href="help_bzflag.html">Bzflag</a></li>
-            <li><a href="help_hedgewars.html">Hedgewars</a></li>
-            <li><a href="help_lix.html">Lix</a></li>
-            <li><a href="help_mindustry.html">Mindustry</a></li>
-            <li><a href="help_odamex.html">Odamex</a></li>
-            <li><a href="help_openhv.html">OpenHV</a></li>
-            <li><a href="help_openspades.html">OpenSpades</a></li>
-            <li><a href="help_shatteredparadise.html">Shattered Paradise</a></li>
-            <li><a href="help_soldat.html">Soldat</a></li>
-            <li><a href="help_supertuxkart.html">SuperTuxKart</a></li>
-            <li><a href="help_supertuxparty.html">Super Tux Party</a></li>
-            <li><a href="help_teeworlds.html">Teeworlds</a></li>
-            <li><a href="help_ufoai.html">UFO: Alien Invasion</a></li>
-            <li><a href="help_unvanquished.html">Unvanquished</a></li>
-            <li><a href="help_xonotic.html">Xonotic</a></li>
+            {% assign sorted_games = site.data.games | sort: "title" %}
+            {% for game in sorted_games %}
+            <li><a href="help_{{ game.name }}.html">{{ game.title }}</a></li>
+            {% endfor %}
           </ul>
-        </div>
-        <div class="col-6 col-md-4">
-          <h5>Live stats</h5>
-          SERVERSTATE
-        </div>
-      </div>
-    </div>
-
-  </body>
-</html>

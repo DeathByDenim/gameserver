@@ -1,41 +1,8 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Game server</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/serverstats.css">
-    <link rel="stylesheet" href="css/help.css">
-    <link rel="icon" href="icon.svg" sizes="any" type="image/svg+xml">
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="js/serverstats.js"></script>
-  </head>
-  <body>
-    <nav class="container">
-      <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-          <img class="bi me-2" width="40" height="32" src="img/blackmage.svg" alt="Site icon">
-          <span class="fs-4">onFOSS-LAN hosted by HOSTEDBYNAME</span>
-        </a>
-
-        <ul class="nav nav-pills">
-          <li class="nav-item"><a href="index.html" class="nav-link" aria-current="page">Home</a></li>
-          <li class="nav-item"><a href="tournament.html" class="nav-link">Tournament</a></li>
-          <li class="nav-item"><a href="schedule.html" class="nav-link">Schedule</a></li>
-          <li class="nav-item"><a href="help.html" class="nav-link active">Help</a></li>
-          <li class="nav-item"><a href="admin.html" class="nav-link">Admin</a></li>
-        </ul>
-      </header>
-    </nav>
-
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8">
-          <h1>Odamex</h1>
-          <p>Multiplayer-focused DOOM engine that allows deathmatch, coop, and capture the flag mode. Here we are using the <a href="https://freedoom.github.io/">Freedom</a> assets so you don't need a copy of the original game to play.</p>
-          <img src="img/odamex.png" alt="Screenshot of Odamex">
-          <h2>Getting the game</h2>
-          <div class="download"><a href="https://odamex.net/">DOWNLOAD</a></div>
+---
+layout: help
+game: odamex
+download_link: https://odamex.net/
+---
           <h2>Tips</h2>
           <ul>
             <li>Use &lt;SPACE&gt; to jump</li>
@@ -45,15 +12,5 @@
           <p>While Odamex does have a launcher, if requires that you have DOOM assets available locally. It won't launch the game without it, which means you either need the original game data of open assets such as Freedoom.</p>
           <p>However, if you connect to the game server directly, odamex will download the required assets automatically from the server.</p>
           <p>From the terminal, type:</p>
-          <p><tt>odamex -connect DOMAINNAME  +set cl_name "YourName"</tt></p>
+          <p><tt>odamex -connect {{ site.content.domain_name }} +set cl_name "YourName"</tt></p>
           <p>Of course, substitute &quot;YourName&quot; with the in-game name you want.</p>
-        </div>
-        <div class="col-6 col-md-4">
-          <h5>Live stats</h5>
-          SERVERSTATE
-        </div>
-      </div>
-    </div>
-
-  </body>
-</html>

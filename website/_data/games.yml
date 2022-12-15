@@ -1,0 +1,114 @@
+- name: armagetron
+  title: "Armagetron Advanced"
+  description: "Drive your lightcycle and leave a lightwall behind you. Survive as long as you can and try to make other run into walls."
+  download_link: "http://www.armagetronad.org/downloads.php"
+  has_console: true
+  console_output_coloring: "Terminal"
+  console_initial_command: "players"
+  console_help_link: "http://wiki.armagetronad.org/index.php?title=Console_Commands"
+  console_example_commands:
+    - ["players", "Show current players"]
+    - ["kick <name>", "Kick the player"]
+    - ["num_ais <num>", "Set the number of AIs for games with more than one player"]
+    - ["limit_rounds", "End the match after this number of rounds"]
+- name: bzflag
+  title: "Bzflag"
+  description: "Drive around in a tank that can jump, trying to shoot your opponents while dodging their bullets."
+  download_link: "https://www.bzflag.org/downloads/"
+  has_console: true
+  console_output_coloring: "Terminal"
+  console_initial_command: "/playerlist"
+  console_help_link: "https://wiki.bzflag.org/Slash_Commands"
+  console_example_commands:
+    - ["/playerlist", "Display list of players"]
+    - ["/kick <name>", "Kick the player"]
+    - ["/gameover", "end the current game"]
+- name: hedgewars
+  title: "Hedgewars"
+  description: "Worms-like game where your team of hedgehogs needs to destroy the other teams using the ludicrous arsenal at their disposal."
+  download_link: "https://www.hedgewars.org/download.html"
+- name: lix
+  title: "Lix"
+  description: "Lemmings-like game where you need to guide your little people to safety despite their best efforts of wandering into things that will kill them."
+  download_link: "https://github.com/SimonN/LixD#get-lix"
+- name: mindustry
+  title: "Mindustry"
+  description: "A building and tower defence game where you build up an industry and defences against ever larger waves of enemies."
+  download_link: "https://github.com/Anuken/Mindustry/releases"
+  has_console: true
+  console_output_coloring: "Terminal"
+  console_initial_command: "status"
+  console_help_link: "https://mindustrygame.github.io/wiki/servers/#dedicated-server-commands"
+  console_example_commands:
+    - ["status", "Display server status"]
+    - ["runwave", "Trigger the next wave"]
+    - ["kick <name>", "Kick a person by name"]
+- name: odamex
+  title: "Odamex"
+  description: "Multiplayer-focused DOOM engine that allows deathmatch, coop, and capture the flag mode. Here we are using the Freedom assets so you don't need a copy of the original game to play."
+  download_link: "https://odamex.net/"
+- name: openhv
+  title: "OpenHV"
+  description: "Real-time strategy game where you mine resources and build units to attack and defend."
+  download_link: "https://github.com/OpenHV/OpenHV/releases"
+- name: openspades
+  title: "OpenSpades"
+  description: "Mix between a first person shooter and Minecraft. Build defence structures, dig many tunnels or go on the offensive."
+  warning: "uses potentially non-open assets. Fix is <a href=\"help_openspades.html#nonfreeassets\"> here</a>."
+  download_link: "https://github.com/yvt/openspades/releases"
+- name: shatteredparadise
+  title: "Shattered Paradise"
+  description: "Real-time strategy game where you mine resources and build units to attack and defend."
+  download_link: "https://github.com/ABrandau/Shattered-Paradise-SDK/releases"
+- name: opensoldat
+  title: "OpenSoldat"
+  description: "Fast-paced 2D side-scrolling shooter game where you have a big gun and a jetpack."
+  download_link: "https://github.com/opensoldat/opensoldat/releases/"
+- name: supertuxkart
+  title: "SuperTuxKart"
+  description: "Kart racing game where you can use the various power-ups to give yourself a boost of hinder your opponents."
+  download_link: "https://supertuxkart.net/Download"
+- name: supertuxparty
+  title: "Super Tux Party"
+  description: "Turn-based party game where you challenge other player in real-time mini games."
+  download_link: "https://supertux.party/download/latest/"
+- name: teeworlds
+  title: "Teeworlds"
+  description: "Fast-paced 2D side-scrolling shooter game where you have a big gun and a grappling hook."
+  download_link: "https://www.teeworlds.com/?page=downloads"
+  has_console: true
+  console_output_coloring: "Terminal"
+  console_initial_command: "status"
+  console_help_link: "https://www.teeworlds.com/?page=docs&wiki=server_commands"
+  console_example_commands:
+    - ["status", "Display server status"]
+    - ["change_map <mapname>", "Switch to <mapname>"]
+    - ["kick <id>", "Kick a person by id"]
+- name: ufoai
+  title: "UFO: Alien Invasion"
+  description: "Squad-based turn-based tactical strategy game in the tradition of the old X-COM PC games"
+  download_link: "https://ufoai.org/wiki/Download"
+- name: unvanquished
+  title: "Unvanquished"
+  description: "First-person shooter of aliens vs humans. There are several classes and it's possible to build structures."
+  download_link: "https://unvanquished.net/download/"
+  has_console: true
+  console_output_coloring: "Daemoned"
+  console_initial_command: "/status"
+  console_help_link: "https://wiki.unvanquished.net/wiki/Server/Running#Commands"
+  console_example_commands:
+    - ["/listplayers", "List current players in-game"]
+    - ["/kick <name>", "Kick the player"]
+    - ["/nextmap", "Go to the next map in the rotation"]
+- name: xonotic
+  title: "Xonotic"
+  description: "First-person shooter where players compete in a 3D world. It features Battle Royale mode."
+  download_link: "https://xonotic.org/download/"
+  has_console: true
+  console_output_coloring: "Daemoned"
+  console_initial_command: "who"
+  console_help_link: "https://gitlab.com/xonotic/xonotic/-/wikis/Basic-server-configuration"
+  console_example_commands:
+    - ["who", "List current players in-game"]
+    - ["kick <name>", "Kick the player"]
+    - ["gotomap <name>", "Go to the specified map"]

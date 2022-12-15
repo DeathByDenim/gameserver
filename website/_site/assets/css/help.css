@@ -1,0 +1,15 @@
+.download {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.download a {
+  color: #222;
+  font-weight: bold;
+  text-decoration: none;
+  border: solid 3px #bbb;
+  border-radius: 30px;
+  padding: 1em;
+  margin: 1em;
+  background-color: #eee;
+}

@@ -67,7 +67,7 @@ apt install --assume-yes \
   fuse g++ gcc curl firewalld automake autoconf libtool \
   libcurl3-dev libc-ares-dev zlib1g-dev libncurses-dev make python3-aiohttp \
   nginx-core certbot python3-certbot-nginx sudo python3-psutil \
-  ldc dub libenet-dev python3-bcrypt jq telnet
+  ldc dub libenet-dev python3-bcrypt jq telnet jekyll
 
 # Create the user for running the game servers
 if ! getent passwd ${systemuser}; then

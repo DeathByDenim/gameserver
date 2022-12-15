@@ -1,0 +1,78 @@
+- date: 2022-12-17T14:00:00UTC
+  intro: "onFOSS-LAN hosted by DeathByDenim"
+  games:
+    - time: "14:00"
+      title: "Get together"
+    - time: "14:30"
+      title: "Doom (ODAMEX) XMAS mod"
+    - time: "15:15"
+      title: "Teeworlds"
+    - time: "16:00"
+      title: "OpenSpades"
+    - time: "17:00"
+      title: "Break"
+    - time: "18:00"
+      title: "Lix"
+    - time: "18:30"
+      title: "Free Play!"
+- date: 2022-07-02T14:00:00UTC
+  intro: "onFOSS-LAN hosted by DeathByDenim"
+  games:
+    - time: "14:00"
+      title: "OpenSoldat"
+    - time: "15:00"
+      title: "Lix"
+    - time: "16:00"
+      title: "Teeworlds DDrace"
+    - time: "17:00"
+      title: "Free play!"
+      extras: ["OpenSpades", "OpenHV"]
+- date: 2022-03-19T14:00:00UTC
+  intro: "onFOSS-LAN hosted by DeathByDenim"
+  games:
+    - time: "14:00"
+      title: "Armagetron Advanced"
+    - time: "15:00"
+      title: "Xonotic - Battle Royale"
+    - time: "16:00"
+      title: "Lix"
+    - time: "16:30"
+      title: "Free play!"
+      extras: ["Hedgewars", "SuperTuxKart (Race and Soccer modes)"]
+  content: |
+          <p>
+            Additionally, there was a fundraiser to help the people suffering
+            from the war in Ukraine &#x1F1FA;&#x1F1E6;. I matched your donation
+            (up to $500 total) and additionally, the government of Canada
+            &#x1F1E8;&#x1F1E6; will match mine until 18 March. So, that's triple
+            the value for any donation you make. It doesn't have to be to the
+            Canadian Red Cross, you probably have a local equivalent.
+          </p>
+          <p>
+            <em>UPDATE (2022-03-08)</em>: Canada reached the $10M already so they are not
+            doubling anymore. I'll still double but this means your amount won't
+            count as triple anymore.
+          </p>
+          <p>
+            <em>UPDATE (2022-03-13)</em>: Canada increased the limit to $30M, so
+            any donation you make is once again tripled.
+          </p>
+          <p>
+            <em>UPDATE (2022-03-14)</em>: Oh, never mind, this goal has already
+            been reached. Anyway, I'll still match what you donate!
+          </p>
+          <p>
+            <em>UPDATE (2022-03-19)</em>: Donations are closed. A total amount
+            of &euro;40 was collected and the equivalent of CAD 55.64 was
+            donated to the Canadian Red Cross.
+          </p>
+          <p>List of donations:</p>
+          <ul>
+            <li>Anonymous: &euro;40</li>
+          </ul>
+- date: 2022-02-12T15:00UTC
+  intro: "Session to test if it all works as intended"
+  games:
+    - title: "OpenSpades"
+    - title: "OpenHV"
+    - title: "Xonotic"

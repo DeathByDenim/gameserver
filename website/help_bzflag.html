@@ -1,41 +1,7 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Game server</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/serverstats.css">
-    <link rel="stylesheet" href="css/help.css">
-    <link rel="icon" href="icon.svg" sizes="any" type="image/svg+xml">
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="js/serverstats.js"></script>
-  </head>
-  <body>
-    <nav class="container">
-      <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-          <img class="bi me-2" width="40" height="32" src="img/blackmage.svg" alt="Site icon">
-          <span class="fs-4">onFOSS-LAN hosted by HOSTEDBYNAME</span>
-        </a>
-
-        <ul class="nav nav-pills">
-          <li class="nav-item"><a href="index.html" class="nav-link" aria-current="page">Home</a></li>
-          <li class="nav-item"><a href="tournament.html" class="nav-link">Tournament</a></li>
-          <li class="nav-item"><a href="schedule.html" class="nav-link">Schedule</a></li>
-          <li class="nav-item"><a href="help.html" class="nav-link active">Help</a></li>
-          <li class="nav-item"><a href="admin.html" class="nav-link">Admin</a></li>
-        </ul>
-      </header>
-    </nav>
-
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8">
-          <h1>Bzflag</h1>
-          <p>Drive around in a tank that can jump, trying to shoot your opponents while dodging their bullets.</p>
-          <img src="img/bzflag.png" alt="Screenshot of Bzflag">
-          <h2>Getting the game</h2>
-          <div class="download"><a href="https://www.bzflag.org/downloads/">DOWNLOAD</a></div>
+---
+layout: help
+game: bzflag
+---
           <h2>Tips</h2>
           <ul>
             <li>Jump using the &lt;Tab&gt; key</li>
@@ -45,18 +11,8 @@
           <h2>Connecting</h2>
           <p>Use the arrow keys to nagivate to Join Game and press &lt;Enter&gt;.</p>
           <p>
-            Move down to Server and type DOMAINNAME and keep the port number at 5154.
+            Move down to Server and type {{ site.content.domain_name }} and keep the port number at 5154.
             You can also set your Callsign here. This is how other players will see
             your name. Then move up to Connect and press &lt;Enter&gt;.</p>
-          <img src="img/help_bzflag.png" alt="Server join screen for Bzflag" class="img-fluid">
+          <img src="assets/img/help_bzflag.png" alt="Server join screen for Bzflag" class="img-fluid">
           <p>You should now be connected.</p>
-        </div>
-        <div class="col-6 col-md-4">
-          <h5>Live stats</h5>
-          SERVERSTATE
-        </div>
-      </div>
-    </div>
-
-  </body>
-</html>
