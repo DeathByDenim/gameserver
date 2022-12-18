@@ -21,22 +21,54 @@ if [ -e /etc/systemd/system/odamex.service ]; then
   systemctl stop odamex
 fi
 
+if [ -z ${odamex_version} ] || [ "${odamex_version}" = "latest" ]; then
+  odamex_version=$(curl -s https://api.github.com/repos/odamex/odamex/releases/latest | jq -r '.["tag_name"]')
+fi
+
 # Install ODAMEX
-apt install --assume-yes libsdl2-dev libsdl2-mixer-dev cmake deutex freedoom
+apt install --assume-yes libsdl2-dev libsdl2-mixer-dev cmake deutex freedoom libpng-dev
 mkdir -p ${TMPDIR:-/tmp}/odamex-build
-curl --location https://downloads.sourceforge.net/project/odamex/Odamex/${odamex_version}/odamex-src-${odamex_version}.tar.xz | tar --extract --xz --no-same-owner --directory="${TMPDIR:-/tmp}/odamex-build"
+curl --location https://github.com/odamex/odamex/releases/download/${odamex_version}/odamex-src-${odamex_version}.tar.gz | tar --extract --gz --no-same-owner --directory="${TMPDIR:-/tmp}/odamex-build"
 mkdir ${TMPDIR:-/tmp}/odamex-build/odamex-src-${odamex_version}/build
 cd ${TMPDIR:-/tmp}/odamex-build/odamex-src-${odamex_version}/build
-cmake -DBUILD_CLIENT=OFF -DBUILD_LAUNCHER=OFF -DCMAKE_INSTALL_PREFIX=/opt/odamex-${odamex_version} ..
+cmake -DBUILD_CLIENT=OFF -DBUILD_SERVER=ON -DBUILD_LAUNCHER=OFF -DCMAKE_INSTALL_PREFIX=/opt/odamex-${odamex_version} ..
 make
 make install
+
+# Build AppImage
+mkdir -p AppDir
+cmake -DBUILD_CLIENT=ON -DBUILD_SERVER=OFF -DBUILD_LAUNCHER=OFF -DCMAKE_INSTALL_PREFIX=AppDir ..
+make
+make install
+curl -O --location 'https://github.com/linuxdeploy/linuxdeploy-plugin-appimage/releases/download/continuous/linuxdeploy-plugin-appimage-x86_64.AppImage'
+curl -O --location 'https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage'
+chmod +x linuxdeploy-plugin-appimage-x86_64.AppImage linuxdeploy-x86_64.AppImage
+mkdir -p AppDir/usr/share/applications
+cat > AppDir/usr/share/applications/odamex.desktop <<EOF
+[Desktop Entry]
+Type=Application
+Categories=Game
+Name=Odamex
+Exec=odamex
+Icon=odamex
+StartupNotify=false
+Terminal=false
+EOF
+for f in ../media/icon_odamex_*.png; do
+  resolution=$(echo $f | sed s/"..\/media\/icon_odamex_\([0-9]*\).png"/\\1/g)
+  mkdir -p AppDir/usr/share/icons/hicolor/${resolution}x${resolution}/apps/
+  cp $f AppDir/usr/share/icons/hicolor/${resolution}x${resolution}/apps/odamex.png
+done
+cat > AppDir/AppRun <<EOF
+#!/bin/bash
+export DOOMWADPATH=\$APPDIR/share/odamex/
+\$APPDIR/bin/odamex \$@
+EOF
+chmod +x AppDir/AppRun
+./linuxdeploy-x86_64.AppImage --appdir AppDir --output=appimage
+cp Odamex-x86_64.AppImage /var/www/html/assets
 cd -
 rm -rf ${TMPDIR:-/tmp}/odamex-build
-
-# Ugh, these links expire. Always need to download manually
-# if curl --location 'https://www.moddb.com/downloads/mirror/189782/123/ec702ae81b867d6096c396335fbff692/?referer=https%3A%2F%2Fwww.moddb.com%2Fmods%2Fdoom-christmas-for-doom-ii-final-doom' > ${TMPDIR:-/tmp}/doomxmas.zip; then
-#   unzip -o -d /usr/share/games/doom/ ${TMPDIR:-/tmp}/doomxmas.zip
-# fi
 
 proto="http"
 if [ x"$NOSSL" = "x" ] || [ $NOSSL -ne 1 ]; then
@@ -51,12 +83,11 @@ set sv_website "${proto}://${DOMAINNAME}/"
 set sv_downloadsites "${proto}://${DOMAINNAME}/wads/"
 set rcon_password "${systempassword}"
 set sv_gametype "0"
-set sv_skill "5"
+set sv_skill "3"
 set sv_maxplayers "32"
-set sv_monstersrespawn 1
+set sv_monstersrespawn 120
 set sv_warmup 1
 set sv_countdown 5
-wad doomxmas.wad
 EOF
 chown -R ${systemuser}: /home/${systemuser}/.odamex/
 
@@ -74,6 +105,10 @@ User=${systemuser}
 [Install]
 WantedBy=multi-user.target
 EOF
+
+# Make wads available for download
+mkdir -p /var/www/html/wads
+cp -r /usr/share/games/doom/freedoom?.wad /var/www/html/wads
 
 systemctl daemon-reload
 systemctl enable --now odamex.service

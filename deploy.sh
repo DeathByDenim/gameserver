@@ -37,7 +37,7 @@ fi
 export stk_version="latest"
 export bzflag_version="2.4"
 export mindustry_version="latest"
-export odamex_version="10.2.0"
+export odamex_version="latest"
 export openhv_version="latest"
 export teeworlds_version="latest"
 export teeworldsddrace_version="16.1"
