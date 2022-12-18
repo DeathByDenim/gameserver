@@ -15,6 +15,7 @@
       title: "Lix"
     - time: "18:30"
       title: "Free Play!"
+      extras: ["Shattered Paradise"]
 - date: 2022-07-02T14:00:00UTC
   intro: "onFOSS-LAN hosted by DeathByDenim"
   games:
