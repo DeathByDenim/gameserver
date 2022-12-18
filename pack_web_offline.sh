@@ -23,18 +23,30 @@
 
 set -e
 
+if ! which jekyll > /dev/null; then
+  echo "Jekyll is required to generate the website"
+  exit 1
+fi
+
 webroot=${TMPDIR:-/tmp}/website
 mkdir -p ${webroot}
-cp -r "$(dirname "$0")"/website/[^_]* ${webroot}
-for file in ${webroot}/*\.html ${webroot}/js/*\.js; do
-  sed -i $file -e s/"DOMAINNAME"/"${DOMAINNAME}"/g
-done
-for file in ${webroot}/*\.html; do
-  sed -i $file -e s/"HOSTEDBYNAME"/"${HOSTEDBYNAME}"/g
-done
-for file in ${webroot}/*\.html; do
-  sed -i $file -e "/SERVERSTATE/r $(dirname "$0")/website/_state/offline.html"
-  sed -i $file -e "/SERVERSTATE/d"
-done
-tar -cjf web.tar.bz2 --directory="${webroot}" .
+cp -r "$(dirname "$0")"/website/* ${webroot}
+
+curl --location https://github.com/twbs/bootstrap/archive/v5.2.3.zip > ${TMPDIR:-/tmp}/bootstrap.zip
+unzip -o -d ${TMPDIR:-/tmp}/bootstrap ${TMPDIR:-/tmp}/bootstrap.zip "bootstrap-5.2.3/scss/*"
+if [ -d "$(dirname "$0")"/../website/_sass/bootstrap ]; then
+  rm -r "$(dirname "$0")"/../website/_sass/bootstrap
+fi
+mv ${TMPDIR:-/tmp}/bootstrap/bootstrap-5.2.3/scss ${webroot}/_sass/bootstrap
+rm -r ${TMPDIR:-/tmp}/bootstrap.zip ${TMPDIR:-/tmp}/bootstrap
+cat > ${webroot}/_config.yml <<EOF
+content:
+  hosted_by_name: "${HOSTEDBYNAME}"
+  domain_name: "${DOMAINNAME}"
+  offline: true
+  ssl: true
+  md5password: "$(echo -n "${systempassword}" | md5sum | cut -d' ' -f1)"
+EOF
+jekyll build --source ${webroot} --destination ${webroot}/_site
+tar -cjf web.tar.bz2 --directory="${webroot}/_site" .
 rm -rf "${webroot}"
