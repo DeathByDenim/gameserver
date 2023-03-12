@@ -95,6 +95,7 @@ cp console2web/console2web.py /usr/bin/console2web
 "$(dirname "$0")"/scripts/deploy_hedgewars.sh
 "$(dirname "$0")"/scripts/deploy_lix.sh
 "$(dirname "$0")"/scripts/deploy_mindustry.sh
+"$(dirname "$0")"/scripts/deploy_minetest.sh
 "$(dirname "$0")"/scripts/deploy_odamex.sh
 "$(dirname "$0")"/scripts/deploy_openhv.sh
 "$(dirname "$0")"/scripts/deploy_openspades.sh
