@@ -21,6 +21,8 @@ if [ -e /etc/systemd/system/bzflag.service ]; then
   systemctl stop bzflag
 fi
 
+apt-get -y install build-essential pkg-config
+
 # Install BZFlag
 mkdir -p ${TMPDIR:-/tmp}/bzflag-build
 cd ${TMPDIR:-/tmp}/bzflag-build
