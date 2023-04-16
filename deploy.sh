@@ -90,25 +90,32 @@ cp console2web/console2web.py /usr/bin/console2web
 "$(dirname "$0")"/scripts/deploy_webserver.sh
 
 # Deploy the game servers
-"$(dirname "$0")"/scripts/deploy_supertuxkart.sh
-"$(dirname "$0")"/scripts/deploy_bzflag.sh
-"$(dirname "$0")"/scripts/deploy_hedgewars.sh
-"$(dirname "$0")"/scripts/deploy_lix.sh
-"$(dirname "$0")"/scripts/deploy_mindustry.sh
-"$(dirname "$0")"/scripts/deploy_minetest.sh
-"$(dirname "$0")"/scripts/deploy_odamex.sh
-"$(dirname "$0")"/scripts/deploy_openhv.sh
-"$(dirname "$0")"/scripts/deploy_openspades.sh
-"$(dirname "$0")"/scripts/deploy_teeworlds.sh
-"$(dirname "$0")"/scripts/deploy_teeworlds-ddrace.sh
-"$(dirname "$0")"/scripts/deploy_unvanquished.sh
-"$(dirname "$0")"/scripts/deploy_xonotic.sh
-"$(dirname "$0")"/scripts/deploy_xonotic-br.sh
-"$(dirname "$0")"/scripts/deploy_armagetron_advanced.sh
-"$(dirname "$0")"/scripts/deploy_opensoldat.sh
-"$(dirname "$0")"/scripts/deploy_supertuxparty.sh
-"$(dirname "$0")"/scripts/deploy_ufoai.sh
-"$(dirname "$0")"/scripts/deploy_shatteredparadise.sh
+games="\
+supertuxkart \
+bzflag \
+hedgewars \
+lix \
+mindustry \
+minetest \
+odamex \
+openhv \
+openspades \
+teeworlds \
+teeworlds-ddrace \
+unvanquished \
+xonotic \
+xonotic-br \
+armagetron_advanced \
+opensoldat \
+supertuxparty \
+ufoai \
+shatteredparadise"
+failed_games=""
+for game in $games; do
+  if ! "$(dirname "$0")"/scripts/deploy_${game}.sh; then
+    failed_games+="${game}\n"
+  fi
+done
 
 # Apply all pending firewall rules. NGINX shouldn't have to be restarted, but it seems to help.
 firewall-cmd --reload
@@ -116,3 +123,34 @@ systemctl restart nginx
 
 echo
 echo "Installation complete. Password is ${systempassword}"
+if [ -n "$failed_games" ]; then
+  echo "The following games failed to install:"
+  echo -e "$failed_games"
+  echo
+  echo "Use /usr/local/bin/redeploy.sh [game] to try again"
+fi
+
+cat > /usr/local/bin/redeploy.sh <<EOF
+#!/bin/bash
+export stk_version="latest"
+export bzflag_version="2.4"
+export mindustry_version="latest"
+export odamex_version="latest"
+export openhv_version="latest"
+export teeworlds_version="latest"
+export teeworldsddrace_version="16.1"
+export unvanquished_version="latest"
+export xonotic_version="0.8.5"
+export lix_version="latest"
+export shatteredparadise_version="latest"
+
+export systemuser="onfoss"
+export letsencryptemail="jarno@jarno.ca"
+export DOMAINNAME="$DOMAINNAME"
+export HOSTEDBYNAME="$HOSTEDBYNAME"
+export systempassword="$systempassword"
+export systemuserhome="$systemuserhome"
+
+"$(dirname "$(realpath -s "$0")")"/scripts/deploy_\${1}.sh
+EOF
+chmod +x /usr/local/bin/redeploy.sh
