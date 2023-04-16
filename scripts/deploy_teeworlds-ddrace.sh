@@ -54,8 +54,9 @@ fi
 
 unzip -o -d "${teeworldsddrace_directory}"/data/maps ${TMPDIR:-/tmp}/novice.zip
 for f in "${teeworldsddrace_directory}"/data/maps/novice/maps/*.map; do
-  "${teeworldsddrace_directory}"/map_convert_07 "$f" "`echo "$f" | sed s/"maps\/novice\/maps"/"maps7"/g`"
-  cp "$f" "${teeworldsddrace_directory}"/data/maps
+  if "${teeworldsddrace_directory}"/map_convert_07 "$f" "`echo "$f" | sed s/"maps\/novice\/maps"/"maps7"/g`"; then
+    cp "$f" "${teeworldsddrace_directory}"/data/maps
+  fi
 done
 rm -rf "${teeworldsddrace_directory}"/data/maps/novice
 
