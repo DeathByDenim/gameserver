@@ -3,4 +3,35 @@ layout: default
 nav_pill: tournament
 ---
           <h1>Tournament</h1>
-          <p>No tournaments have been planned</p>
+          {% assign sitetime = site.time | date: "%FT%T" %}
+          {% assign nextevent = site.data.events | where_exp: "item", "item.date >= sitetime" | last %}
+          {% assign tournaments = nextevent.games | where_exp: "item", "item.tournament" %}
+          {% if tournaments and tournaments.size != 0 %}
+          <script>
+            var event_year = {{ nextevent.date | date: "%Y" }};
+            var event_month = {{ nextevent.date | date: "%M" }};
+            var event_day = {{ nextevent.date | date: "%M" }};
+          </script>
+          <p>There will be a tournament for the next event on {{ nextevent.date | date: "%a, %b %d, %Y" }}</p>
+          <ul>
+            {% for game in tournaments %}
+            {% assign time = game.time | split: ":"%}
+            {% if game.time %}
+            <li>{{ game.time }}UTC {{ game.title }}<script>d=new Date(Date.UTC(event_year, event_month, event_day, {{ time | slice: 0 }}, {{ time | slice: 1 }}));document.writeln(" ("+ Intl.DateTimeFormat(undefined, {hour: '2-digit', minute: '2-digit', timeZoneName: 'short'}).format(d) + ")")</script></li>
+            {% else %}
+            <li>{{ game.title }}</li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+          {% else %}
+          <p>No tournaments have been planned for the next event.</p>
+          {% endif %}
+          <h2>Rules</h2>
+          <p>By joining the tournament you accept following rules:</p>
+          <h3>MOST IMPORTANT!</h3>
+          <p>The most important rule is: HAVE FUN! Surely, the tournament is competitive, however, don't forget why we are all here - to have fun playing games together!</p>
+          <h3>NO CHEATING!</h3>
+          <p>If you cheat you will get banned from this and all upcoming tournaments! Cheating is: manipulating the game for your advantage. So every third-party tool that help you is not allowed! Due to the blessing of FOSS games can be modified, modification that give you a advantage is also considered cheating! So take the official binaries to play the tournament! If no binaries are available and you have to compile it on your own you are not allowed to modify it. If there is any confusion <a href="index.html#communication">contact us</a> in advance and we will find a solution.</p>
+          <h3>NO GRIEFING!</h3>
+          <p>Griefers going to be kicked immediately and if it happens frequent you get banned for upcoming tournaments.
+          We are all human beings and hopefully capable of being nice to each other! So respect each other and there will not be any problems! However, also counting for griefing is: Register to the event and do not show up without an excuse; Leave the tournament while it is still ongoing and you have to still play any rounds.</p>

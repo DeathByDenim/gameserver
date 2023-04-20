@@ -13,9 +13,9 @@
             {% for game in event.games %}
             {% assign time = game.time | split: ":"%}
             {% if game.time %}
-            <li>{{ game.time }}UTC {{ game.title }}<script>d=new Date(Date.UTC(event_year, event_month, event_day, {{ time | slice: 0 }}, {{ time | slice: 1 }}));document.writeln(" ("+ Intl.DateTimeFormat(undefined, {hour: '2-digit', minute: '2-digit', timeZoneName: 'short'}).format(d) + ")")</script></li>
+            <li>{{ game.time }}UTC {{ game.title }}{%if game.tournament %} <a href="tournament.html" class="game-tournament">Tournament</a>{% endif %}<script>d=new Date(Date.UTC(event_year, event_month, event_day, {{ time | slice: 0 }}, {{ time | slice: 1 }}));document.writeln(" ("+ Intl.DateTimeFormat(undefined, {hour: '2-digit', minute: '2-digit', timeZoneName: 'short'}).format(d) + ")")</script></li>
             {% else %}
-            <li>{{ game.title }}</li>
+            <li>{{ game.title }}{%if game.tournament %} <a href="tournament.html" class="game-tournament">Tournament</a>{% endif %}</li>
             {% endif %}
             {% if game.extras %}
               <ul>
