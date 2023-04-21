@@ -43,6 +43,10 @@
     - ["status", "Display server status"]
     - ["runwave", "Trigger the next wave"]
     - ["kick <name>", "Kick a person by name"]
+- name: minetest
+  title: "Minetest (Blockbomber)"
+  description: "The classic Bomberman game in 3D as a mod for Minetest"
+  download_link: "https://www.minetest.net/downloads/"
 - name: odamex
   title: "Odamex"
   description: "Multiplayer-focused DOOM engine that allows deathmatch, coop, and capture the flag mode. Here we are using the Freedom assets so you don't need a copy of the original game to play."

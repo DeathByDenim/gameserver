@@ -9,16 +9,21 @@ panel for game servers that have interactive shells.
 
 The following games are deployed:
 
+* Armagetron Advanced
 * Bzflag
 * Hedgewars
 * Lix
 * Mindustry
+* Minetest (Blockbomber mod)
+* Odamex
 * OpenHV
 * OpenSpades
 * OpenSoldat
+* Shattered Paradise
 * SuperTuxKart
 * Super Tux Party
 * Teeworlds (optionally as DDrace)
+* UFO: Alien Invasion
 * Unvanquished
 * Xonotic (optionally as Battle Royale)
 
