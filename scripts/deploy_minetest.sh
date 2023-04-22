@@ -65,6 +65,7 @@ server_address = ${DOMAINNAME}
 server_announce = false
 max_users = 32
 enable_split_login_register = false
+ipv6_server = true
 EOF
 
 systemctl daemon-reload
