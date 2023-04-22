@@ -51,6 +51,9 @@ sv_vote_gametype 1
 sv_vote_gametype_options "dm tdm dom ctf ca rc nb as kh inv ka lms ons"
 sv_vote_call 1
 sv_weaponstats_file http://www.xonotic.org/weaponbalance/
+sv_logscores_console 1
+sv_logscores_file 1
+sv_logscores_filename xonotic-scores.log
 EOF
 
 cat > /etc/systemd/system/xonotic.service <<EOF
