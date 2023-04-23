@@ -53,7 +53,7 @@ sv_vote_call 1
 sv_weaponstats_file http://www.xonotic.org/weaponbalance/
 sv_logscores_console 1
 sv_logscores_file 1
-sv_logscores_filename xonotic-scores.log
+sv_logscores_filename xonscore.txt
 EOF
 
 cat > /etc/systemd/system/xonotic.service <<EOF
@@ -84,5 +84,9 @@ location /xonotic {
     proxy_set_header Host \$host;
 }
 EOF
+
+if ! [ -h /var/www/html/xonscore.txt ]; then
+  ln -s "${systemuserhome}"/xonotic/data/data/xonscore.txt /var/www/html
+fi
 
 firewall-cmd --zone=public --add-port=26000/udp --permanent

@@ -2,6 +2,7 @@
 layout: default
 nav_pill: tournament
 ---
+          <script src="js/xonscore.js"></script>
           <h1>Tournament</h1>
           {% assign sitetime = site.time | date: "%FT%T" %}
           {% assign nextevent = site.data.events | where_exp: "item", "item.date >= sitetime" | last %}
@@ -23,6 +24,17 @@ nav_pill: tournament
             {% endif %}
             {% endfor %}
           </ul>
+          <div id="xonotic-results"></div>
+          <script>
+            if(typeof d3 === 'undefined') {
+              document.write('<p><a href="xonscore.csv">Results</a> (allow access to d3js.org for dynamic updates)</p>');
+            }
+            else {
+              xonoticScoreUpdate();
+              setInterval(xonoticScoreUpdate, 10000);
+            }
+          </script>
+          <noscript><p><a href="xonscore.csv">Results</a> (Enable JavaScript for dynamic updates)</p></noscript>
           {% else %}
           <p>No tournaments have been planned for the next event.</p>
           {% endif %}
