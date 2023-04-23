@@ -1,3 +1,23 @@
+- date: 2023-05-06T12:00:00UTC
+  intro: "onFOSS-LAN hosted by hribhrib"
+  games:
+    - time: "12:00"
+      title: "Get and chill together"
+    - time: "13:00"
+      title: "OpenSpades"
+    - time: "14:30"
+      title: "Blockbomber"
+    - time: "15:30"
+      title: "Break"
+    - time: "16:00"
+      title: "Xonotic"
+      tournament: true
+    - time: "18:00"
+      title: "Break"
+    - time: "18:30"
+      title: "OpenHV"
+    - time: "20:00"
+      title: "Mindustry"
 - date: 2022-12-17T14:00:00UTC
   intro: "onFOSS-LAN hosted by DeathByDenim"
   games:

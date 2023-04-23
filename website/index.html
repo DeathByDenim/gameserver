@@ -15,9 +15,15 @@ nav_pill: home
           </p>
           <p>This concept was originally started at <a href="https://onfoss.hribhrib.at/">hribhrib.at</a></p>
           <h1>Next event</h1>
-          <h4>Saturday 17 December 2022, 14:00 UTC</h4>
-          <script>var zone = new Date().toLocaleTimeString('en-ca',{timeZoneName:'short'}).split(' ')[2];d=new Date("Sat, 17 Dec 2022 14:00:00 UTC");document.writeln("<p>(Local time: "+d.toTimeString()+")</p>")</script>
+          {% assign sitetime = site.time | date: "%FT%T" %}
+          {% assign upcoming = site.data.events | where_exp: "item", "item.date >= sitetime" | last %}
+          {% if upcoming %}
+          <h4>{{ upcoming.date | date: "%A %e %B %Y, %R" }} UTC</h4>
+          <script>var zone = new Date().toLocaleTimeString('en-ca',{timeZoneName:'short'}).split(' ')[2];d=new Date("{{ upcoming.date | date_to_rfc822 }}");document.writeln("<p>(Local time: "+d.toTimeString()+")</p>")</script>
           <p>See <a href="schedule.html">schedule</a> for more information.</p>
+          {% else %}
+          <p>No next event has been scheduled yet.</p>
+          {% endif %}
           <h1 id="communication">Communication</h1>
           <p>We use Mumble voice chat on <a href="mumble://hribhrib.at">mumble://hribhrib.at</a>. It is the main mode of cummunication during the event.</p>
           <p>We also have regular text chat for any time use. You can choose the protocol you like and the program you like, they all point to the same thing in the end</p>
