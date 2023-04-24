@@ -47,7 +47,7 @@ sudo -u ${systemuser} sed -i ${systemuserhome}/.config/piqueserver/config.toml \
   -e s/"color = \[ 0, 0, 255\]"/"color = [ 0, 255, 255]"/ \
   -e s/"name = \"Green\""/"name = \"Pinkster\""/ \
   -e s/"color = \[ 0, 255, 0\]"/"color = [ 255, 0, 255]"/ \
-  -e s/"  \"classicgen\","/"  \"island\",\n  \"pinpoint\",\n  \"realisticbridge\",\n  \"rocketisland\",\n  \"submarine\","/ \
+  -e s/"  \"classicgen\","/"  \"smallrandomisland\",\n  \"island\",\n  \"pinpoint\",\n  \"realisticbridge\",\n  \"rocketisland\",\n  \"submarine\","/ \
   -e s/"default_time_limit = \"2hours\""/"default_time_limit = \"20minutes\""/
 deactivate
 
@@ -69,6 +69,7 @@ for map in island pinpoint realisticbridge rocketisland submarine; do
   curl "https://raw.githubusercontent.com/kinvaris/openspades-maps/master/${map}.txt" > ${systemuserhome}/.config/piqueserver/maps/${map}.txt
   curl "https://raw.githubusercontent.com/kinvaris/openspades-maps/master/${map}.vxl" > ${systemuserhome}/.config/piqueserver/maps/${map}.vxl
 done
+curl "https://raw.githubusercontent.com/DeathByDenim/openspades-maps/main/smallrandomisland.txt" > ${systemuserhome}/.config/piqueserver/maps/smallrandomisland.txt
 
 systemctl daemon-reload
 systemctl enable --now openspades.service
