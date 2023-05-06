@@ -27,14 +27,14 @@ nav_pill: tournament
           <div id="xonotic-results"></div>
           <script>
             if(typeof d3 === 'undefined') {
-              document.write('<p><a href="xonscore.csv">Results</a> (allow access to d3js.org for dynamic updates)</p>');
+              document.write('<p><a href="xonscore.txt">Results</a> (allow access to d3js.org for dynamic updates)</p>');
             }
             else {
               xonoticScoreUpdate();
               setInterval(xonoticScoreUpdate, 10000);
             }
           </script>
-          <noscript><p><a href="xonscore.csv">Results</a> (Enable JavaScript for dynamic updates)</p></noscript>
+          <noscript><p><a href="xonscore.txt">Results</a> (Enable JavaScript for dynamic updates)</p></noscript>
           {% else %}
           <p>No tournaments have been planned for the next event.</p>
           {% endif %}
