@@ -35,6 +35,7 @@ async function xonoticGetScores() {
             break;
         case "end":
             if(round_stats.length > 0) {
+                round_stats = round_stats.sort((a,b) => +a["score!!"] < +b["score!!"]);
                 stats.push({
                     map_name: map_name,
                     duration_in_seconds: duration_in_seconds,
