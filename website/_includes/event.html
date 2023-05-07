@@ -1,8 +1,8 @@
           <h4>{{ event.date | date: "%A %d %B %Y, %H:%M %Z" }}</h4>
           <script>
             var event_year = {{ event.date | date: "%Y" }};
-            var event_month = {{ event.date | date: "%M" }};
-            var event_day = {{ event.date | date: "%M" }};
+            var event_month = {{ event.date | date: "%-m" }};
+            var event_day = {{ event.date | date: "%e" }};
             var d = new Date(Date.UTC(event_year, event_month, event_day, {{ event.date | date: "%H" }}, {{ event.date | date: "%M" }}));
             document.writeln("<p>(Local time: "+d.toTimeString()+")</p>")
           </script>
