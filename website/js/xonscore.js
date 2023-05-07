@@ -32,10 +32,12 @@ async function xonoticGetScores() {
                         if(fields[5] === "spectator") {
                             break;
                         }
-                        let split_fields = fields[3].split(",");
-                        let player_name = fields[6]
-                            .replace(/\^.../g, "")
-                            .replaceAll("^7", "");
+                        const split_fields = fields[3].split(",");
+
+                        // Filter out the custom colours in names
+                        const player_name = fields[6]
+                            .replace(/\^x.../g, "")
+                            .replace(/\^\d/g, "");
                         let player_stats = {name: player_name};
                         for(let i = 0; i < labels.length; i++) {
                             if(labels[i] != "") {
