@@ -1,0 +1,19 @@
+---
+layout: default
+nav_pill: news
+---
+          <h1>News</h1>
+          {% for post in site.posts %}
+          <h2>{{ post.title }}</h2>
+          <p><strong>{{ post.date | date_to_string }} by {{ post.author }}</strong></p>
+          {% if forloop.first %}
+          {{ post.content }}
+          <p><a href="{{ post.url }}">Permalink</a></p>
+          {% else %}
+          {{ post.excerpt }}
+          <p><a href="{{ post.url }}">Read more...</a></p>
+          {% endif %}
+          {% else %}
+          <p>No news</p>
+          {% endfor %}
+          </ul>

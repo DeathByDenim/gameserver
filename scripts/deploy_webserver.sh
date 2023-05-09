@@ -47,6 +47,17 @@ content:
   offline: false
   ssl: ${ssl}
   md5password: "$(echo -n "${systempassword}" | md5sum | cut -d' ' -f1)"
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+plugins:
+  - jekyll-feed
 EOF
 jekyll build --source "$(dirname "$0")"/../website --destination /var/www/html
 

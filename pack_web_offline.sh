@@ -46,6 +46,17 @@ content:
   offline: true
   ssl: true
   md5password: "$(echo -n "${systempassword}" | md5sum | cut -d' ' -f1)"
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+plugins:
+  - jekyll-feed
 EOF
 jekyll build --source ${webroot} --destination ${webroot}/_site
 tar -cjf web.tar.bz2 --directory="${webroot}/_site" .
