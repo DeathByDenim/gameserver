@@ -39,12 +39,26 @@ if [ -d "$(dirname "$0")"/../website/_sass/bootstrap ]; then
 fi
 mv ${TMPDIR:-/tmp}/bootstrap/bootstrap-5.2.3/scss ${webroot}/_sass/bootstrap
 rm -r ${TMPDIR:-/tmp}/bootstrap.zip ${TMPDIR:-/tmp}/bootstrap
+
+if [ x"$NOSSL" = "x" ] || [ $NOSSL -ne 1 ]; then
+  ssl="true"
+  s_for_https="s"
+else
+  ssl="false"
+  s_for_https=""
+fi
+
 cat > ${webroot}/_config.yml <<EOF
+title: "onFOSS"
+description: >
+  onFOSS-LAN is a online, "Free (as Freedom) and Open Source" LAN-Party hosted by ${HOSTEDBYNAME} The goal is to get people together, enjoying the art of computer games and having a great time in these days. The FOSS community is a place of being open minded and acceptance to all different kinds of people with the focus of fully transparent systems and protecting individuals. So it does not matter if you are on Windows, Mac or Linux and it is also NOT necessary to have a PC MASTERRACE setup to run those games.
+url: http${s_for_https}://${DOMAINNAME}
+
 content:
   hosted_by_name: "${HOSTEDBYNAME}"
   domain_name: "${DOMAINNAME}"
   offline: true
-  ssl: true
+  ssl: ${ssl}
   md5password: "$(echo -n "${systempassword}" | md5sum | cut -d' ' -f1)"
 
 defaults:
