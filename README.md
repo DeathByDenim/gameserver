@@ -1,3 +1,7 @@
+## This repository is no longer being updated
+
+This code is now part of the onFOSS organization. Refer to https://git.libregaming.org/onFOSS/Gameserver for the up-to-date version of the game server.
+
 # Game server
 
 This is a collection of scripts to deploy game servers on Debian 11. All game
